@@ -50,6 +50,7 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public void connect() throws SQLException {
+        DriverManager.setLoginTimeout(5); // five seconds timeout
         this.connection = DriverManager.getConnection(this.host, this.user, this.password);
         LOGGER.debug("Successfully established connection to host");
     }
