@@ -35,7 +35,7 @@ public class MySqlDataLayer implements DataLayer {
             LOGGER.debug("Loading connection properties file");
 
             // read connection properties from file
-            connectionProps.load(new FileReader("connection.properties"));
+            connectionProps.load(getClass().getResourceAsStream("/connection.properties"));
 
             // read properties
             this.host = connectionProps.getProperty("db_host");
