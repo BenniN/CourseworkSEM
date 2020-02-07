@@ -22,15 +22,20 @@ public class DefaultAppServices implements AppServices {
 
     @Override
     public List<CountryReport> getAllCountriesOrderedByLargestPopulationToSmallest() throws SQLException {
-        ResultSet resultSet = dataLayer.executeNativeQuery("select * from country");
+        // get data from database
+        ResultSet resultSet = dataLayer.executeNativeQuery(Reports.ALL_COUNTRIES_ORDERED_BY_LARGEST_POPULATION_TO_SMALLEST);
         List<CountryReport> resultList = new ArrayList<>();
         while (resultSet.next()) {
+            // extract values from result set
             String code = resultSet.getString("Code");
             String name = resultSet.getString("Name");
             String continent = resultSet.getString("Continent");
             int population = resultSet.getInt("population");
             String region = resultSet.getString("Region");
-            CountryReport report = new CountryReport(code, name, continent, region, population, "TODO:capital");
+            String capital = resultSet.getString("Capital");
+
+            // create country report
+            CountryReport report = new CountryReport(code, name, continent, region, population, capital);
             resultList.add(report);
         }
         return resultList;
