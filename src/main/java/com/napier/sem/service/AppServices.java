@@ -1,5 +1,6 @@
 package com.napier.sem.service;
 
+import com.napier.sem.reports.CityReport;
 import com.napier.sem.reports.CountryReport;
 
 import java.sql.SQLException;
@@ -16,5 +17,5 @@ public interface AppServices {
      * @throws SQLException if report could not be generated
      */
     List<CountryReport> getAllCountriesOrderedByLargestPopulationToSmallest() throws SQLException;
-
+    List<CityReport> getAllCitiesInTheWorldOrderedByLargestPopulationToSmallest() throws SQLException;
 }
