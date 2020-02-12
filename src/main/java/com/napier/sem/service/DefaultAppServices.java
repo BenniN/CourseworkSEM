@@ -201,4 +201,20 @@ public class DefaultAppServices implements AppServices {
         }
         return resultList;
     }
+    @Override
+    public List<CityReport> getNCitiesByLargestPopulationToSmallestWhereNisSelectedByUser(int limitsql) throws SQLException {
+        ResultSet resultSet = dataLayer.executeNativeQuery("select name, district, population, CountryCode from city\n" +
+                "ORDER BY population DESC \n" +
+                "limit " + limitsql);
+        List<CityReport> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            String name = resultSet.getString("Name");
+            String district = resultSet.getString("District");
+            String countryCode = resultSet.getString("Country Code ");
+            int population = resultSet.getInt("population");
+            CityReport report = new CityReport(name,countryCode,district,population);
+            resultList.add(report);
+        }
+        return resultList;
+    }
 }

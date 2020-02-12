@@ -91,4 +91,12 @@ public interface AppServices {
      * @throws SQLException if report could not be generated
      */
     List<CapitalCityReport> getNCapitalCitiesByLargestPopulationToSmallestNisSelectedByUser(int limitsql) throws SQLException;
+
+    /**
+     * Generates a list of reports with N Cities in the world organized by largest population to smallest
+     * @param limitsql is the input for the amount of Cities which should be presented
+     * @return a ordered list containing N Cities of the world
+     * @throws SQLException if report could not be generated
+     */
+    List<CityReport> getNCitiesByLargestPopulationToSmallestWhereNisSelectedByUser(int limitsql) throws SQLException;
 }
