@@ -1,6 +1,7 @@
 package com.napier.sem.service;
 
 import com.napier.sem.datalayer.DataLayer;
+import com.napier.sem.reports.CapitalCityReport;
 import com.napier.sem.reports.CityReport;
 import com.napier.sem.reports.CountryReport;
 
@@ -179,6 +180,23 @@ public class DefaultAppServices implements AppServices {
             int population = resultSet.getInt("population");
             String region = resultSet.getString("Region");
             CountryReport report = new CountryReport(code, name, continent, region, population, "TODO:capital");
+            resultList.add(report);
+        }
+        return resultList;
+    }
+    @Override
+    public List<CapitalCityReport> getNCapitalCitiesByLargestPopulationToSmallestNisSelectedByUser(int limitsql) throws SQLException {
+        ResultSet resultSet =dataLayer.executeNativeQuery("select c.name, c.population, co.name FROM city c \n" +
+                "inner join country co on c.CountryCode = co.code  \n" +
+                "where  co.Capital= c.id\n" +
+                "ORDER BY population DESC\n" +
+                "limit "+ limitsql);
+        List<CapitalCityReport> resultList = new ArrayList<>();
+        while(resultSet.next()){
+            String name =resultSet.getString("Name");
+            String country = resultSet.getString("Country");
+            int population = resultSet.getInt("Population");
+            CapitalCityReport report = new CapitalCityReport(name,country,population);
             resultList.add(report);
         }
         return resultList;
