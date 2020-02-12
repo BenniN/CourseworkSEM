@@ -100,5 +100,7 @@ public interface AppServices {
      */
     List<CityReport> getNCitiesByLargestPopulationToSmallestWhereNisSelectedByUser(int limitsql) throws SQLException;
 
-    List<CapitalCityReport> getAllCapitalCitiesfromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws  SQLException;
+    List<CapitalCityReport> getAllCapitalCitiesFromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws  SQLException;
+
+    List<CapitalCityReport> getAllCapitalCitiesFromContinentOrderedByLargestPopulationToSmallest(String continentsql) throws SQLException;
 }
