@@ -221,9 +221,9 @@ public class DefaultAppServices implements AppServices {
     @Override
     public List<CapitalCityReport> getAllCapitalCitiesfromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws SQLException {
         ResultSet resultSet = dataLayer.executeNativeQuery("select c.Name,cnt.Region,c.Population,c.CountryCode from city c\n" +
-                "join country cnt on c.ID = cnt.Capital" +
+                "join country cnt on c.ID = cnt.Capital\n" +
                 "where cnt.Region = " + regionsql + " " +
-                "ORDER BY c.Population DESC");
+                "ORDER BY c.Population DESC\n");
         List<CapitalCityReport> resultList = new ArrayList<>();
         while (resultSet.next()) {
             String name = resultSet.getString("Name");
@@ -234,5 +234,24 @@ public class DefaultAppServices implements AppServices {
             resultList.add(report);
         }
         return resultList;
+    }
+
+    @Override
+    public List<CapitalCityReport> getAllCapitalCitiesInTheWorldOrderedByLargestPopulationToSmallest() throws SQLException {
+        ResultSet resultSet = dataLayer.executeNativeQuery("select c.Name ,cnt.Name, c.Population, c.CountryCode\n"+
+                "from city c\n"+
+                "join country cnt on c.ID = cnt.Capital\n"+
+                "ORDER BY c.Population DESC\n");
+        List<CapitalCityReport> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            String name = resultSet.getString("Name");
+            int population = resultSet.getInt("population");
+            String Country = resultSet.getString("Country");
+            String countryCode = resultSet.getString("Country Code ");
+            CapitalCityReport report = new CapitalCityReport(name, Country, population);
+            resultList.add(report);
+        }
+        return resultList;
+
     }
 }
