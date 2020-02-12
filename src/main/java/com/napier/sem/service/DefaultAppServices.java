@@ -44,15 +44,15 @@ public class DefaultAppServices implements AppServices {
 
     @Override
     public List<CityReport> getAllCitiesInTheWorldOrderedByLargestPopulationToSmallest() throws SQLException {
-        ResultSet resultSet =dataLayer.executeNativeQuery("select name, population, district, countryCode FROM city\n" +
+        ResultSet resultSet = dataLayer.executeNativeQuery("select name, population, district, countryCode FROM city\n" +
                 "ORDER BY population DESC");
-        List<CityReport> resultList =new ArrayList<>();
-        while (resultSet.next()){
+        List<CityReport> resultList = new ArrayList<>();
+        while (resultSet.next()) {
             String name = resultSet.getString("Name");
             int population = resultSet.getInt("population");
             String district = resultSet.getString("District");
             String countryCode = resultSet.getString("Country Code ");
-            CityReport report = new CityReport(name,countryCode,district,population);
+            CityReport report = new CityReport(name, countryCode, district, population);
             resultList.add(report);
         }
         return resultList;
@@ -60,18 +60,37 @@ public class DefaultAppServices implements AppServices {
     }
 
     @Override
-    public List<CityReport> getAllCitiesFromContinentOrderedByLargestPopulationToSmallest(String continent) throws SQLException {
-        ResultSet resultSet =dataLayer.executeNativeQuery("select c.name, c.population, district, c.CountryCode \n" +
+    public List<CityReport> getAllCitiesFromContinentOrderedByLargestPopulationToSmallest(String continentsql) throws SQLException {
+        ResultSet resultSet = dataLayer.executeNativeQuery("select c.name, c.population, district, c.CountryCode \n" +
                 "FROM city c\n" +
                 "inner join country co on c.CountryCode = co.code\n" +
-                "where continent = " + continent + " " +
+                "where continent = " + continentsql + " " +
                 "ORDER BY population DESC");
-        List<CityReport> resultList =new ArrayList<>();
-        while (resultSet.next()){
+        List<CityReport> resultList = new ArrayList<>();
+        while (resultSet.next()) {
             String countryCode = resultSet.getString("Country Code ");
             String name = resultSet.getString("Name");
             String district = resultSet.getString("District");
             int population = resultSet.getInt("population");
+            CityReport report = new CityReport(name, countryCode, district, population);
+            resultList.add(report);
+        }
+        return resultList;
+    }
+    @Override
+    public List<CityReport> getAllCitiesFromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws SQLException {
+        ResultSet resultSet =dataLayer.executeNativeQuery("select c.name, c.population, district, c.CountryCode \n" +
+                "FROM city c\n" +
+                "inner join country co on c.CountryCode = co.code\n" +
+                "where Region = " + regionsql + " "+
+                "ORDER BY population DESC");
+        List<CityReport> resultList =new ArrayList<>();
+        while (resultSet.next()){
+
+            String countryCode = resultSet.getString("Country Code ");
+            int population = resultSet.getInt("population");
+            String district = resultSet.getString("District");
+            String name = resultSet.getString("Name");
             CityReport report = new CityReport(name,countryCode,district,population);
             resultList.add(report);
         }
