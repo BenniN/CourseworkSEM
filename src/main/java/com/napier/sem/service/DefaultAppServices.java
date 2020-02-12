@@ -96,4 +96,22 @@ public class DefaultAppServices implements AppServices {
         }
         return resultList;
     }
+    @Override
+    public List<CityReport> getAllCitiesFromCountryOrderedByLargestPopulationToSmallest(String countrysql) throws SQLException {
+        ResultSet resultSet =dataLayer.executeNativeQuery("select c.name, c.population, district, c.CountryCode \n" +
+                "FROM city c\n" +
+                "inner join country co on c.CountryCode = co.code\n" +
+                "where  co.Name = " + countrysql + " " +
+                "ORDER BY population DESC");
+        List<CityReport> resultList =new ArrayList<>();
+        while (resultSet.next()){
+            int population = resultSet.getInt("population");
+            String countryCode = resultSet.getString("Country Code ");
+            String name = resultSet.getString("Name");
+            String district = resultSet.getString("District");
+            CityReport report = new CityReport(name,countryCode,district,population);
+            resultList.add(report);
+        }
+        return resultList;
+    }
 }

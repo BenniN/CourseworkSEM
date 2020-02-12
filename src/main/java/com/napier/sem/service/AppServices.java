@@ -20,4 +20,5 @@ public interface AppServices {
     List<CityReport> getAllCitiesInTheWorldOrderedByLargestPopulationToSmallest() throws SQLException;
     List<CityReport> getAllCitiesFromContinentOrderedByLargestPopulationToSmallest(String continentsql ) throws SQLException;
     List<CityReport> getAllCitiesFromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws SQLException;
+    List<CityReport> getAllCitiesFromCountryOrderedByLargestPopulationToSmallest(String countrysql) throws SQLException;
 }
