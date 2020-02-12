@@ -99,4 +99,6 @@ public interface AppServices {
      * @throws SQLException if report could not be generated
      */
     List<CityReport> getNCitiesByLargestPopulationToSmallestWhereNisSelectedByUser(int limitsql) throws SQLException;
+
+    List<CapitalCityReport> getAllCapitalCitiesfromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws  SQLException;
 }

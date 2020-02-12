@@ -217,4 +217,22 @@ public class DefaultAppServices implements AppServices {
         }
         return resultList;
     }
+
+    @Override
+    public List<CapitalCityReport> getAllCapitalCitiesfromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws SQLException {
+        ResultSet resultSet = dataLayer.executeNativeQuery("select c.Name,cnt.Region,c.Population,c.CountryCode from city c\n" +
+                "join country cnt on c.ID = cnt.Capital" +
+                "where cnt.Region = " + regionsql + " " +
+                "ORDER BY c.Population DESC");
+        List<CapitalCityReport> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            String name = resultSet.getString("Name");
+            String region = resultSet.getString("Region");
+            String countryCode = resultSet.getString("Country Code ");
+            int population = resultSet.getInt("population");
+            CapitalCityReport report = new CapitalCityReport(name, region, population);
+            resultList.add(report);
+        }
+        return resultList;
+    }
 }
