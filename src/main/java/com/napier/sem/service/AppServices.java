@@ -17,9 +17,12 @@ public interface AppServices {
      * @throws SQLException if report could not be generated
      */
     List<CountryReport> getAllCountriesOrderedByLargestPopulationToSmallest() throws SQLException;
+    //get all Cities from ...
     List<CityReport> getAllCitiesInTheWorldOrderedByLargestPopulationToSmallest() throws SQLException;
     List<CityReport> getAllCitiesFromContinentOrderedByLargestPopulationToSmallest(String continentsql ) throws SQLException;
     List<CityReport> getAllCitiesFromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws SQLException;
     List<CityReport> getAllCitiesFromCountryOrderedByLargestPopulationToSmallest(String countrysql) throws SQLException;
     List<CityReport> getAllCitiesFromDistrictOrderedByLargestPopulationToSmallest(String distrcitsql) throws SQLException;
+    // get all countries from ...
+    List<CountryReport> getNCountriesFromWorldOrderedByLargestPopulationToSmallestNisSelectedByUser(int limitsql) throws SQLException;
 }

@@ -130,4 +130,21 @@ public class DefaultAppServices implements AppServices {
         }
         return resultList;
     }
+    @Override
+    public List<CountryReport> getNCountriesFromWorldOrderedByLargestPopulationToSmallestNisSelectedByUser(int limitsql) throws SQLException {
+        ResultSet resultSet = dataLayer.executeNativeQuery("select code, name, Continent, population, Region from country\n" +
+                "order by population DESC\n" +
+                "limit " + limitsql);
+        List<CountryReport> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            String code = resultSet.getString("Code");
+            String name = resultSet.getString("Name");
+            String continent = resultSet.getString("Continent");
+            int population = resultSet.getInt("population");
+            String region = resultSet.getString("Region");
+            CountryReport report = new CountryReport(code, name, continent, region, population,"TODO:capital");
+            resultList.add(report);
+        }
+        return resultList;
+    }
 }
