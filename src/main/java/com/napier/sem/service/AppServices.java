@@ -26,4 +26,5 @@ public interface AppServices {
     // get all countries from ...
     List<CountryReport> getNCountriesFromWorldOrderedByLargestPopulationToSmallestNisSelectedByUser(int limitsql) throws SQLException;
     List<CountryReport> getNCountriesFromContinentOrderedByLargestPopulationToSmallestNisSelectedByUser(String continentsql, int limitsql) throws SQLException;
+    List<CountryReport> getNCountriesFromRegionOrderedByLargestPopulationToSmallestNisSelectedByUser(String regionsql, int limitsql) throws SQLException;
 }
