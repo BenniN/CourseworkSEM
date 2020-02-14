@@ -1,11 +1,15 @@
 
-# USE CASE: 5 Produce a report on number of people with specific languages 
+# USE CASE 5: Produce a report on the number of people with specific languages 
 
 ## CHARACTERISTIC INFORMATION
 
-### Goal in Context
+### Abstract
 
-As an *data scientist* I want *to produce a report on specific languages spoken in the world* so that *I can analyze the number of people speaking English, Arabic, Spain and Chinese*.  
+As a *data scientist* I want *to produce a report on specific languages spoken in the world* so that *I can analyze the number of people speaking English, Arabic, Spanish and Chinese*.  
+
+### Motivation
+
+To provide a report for the company containing vital up-to-date information regarding the break down of the languages spoken in the world.
 
 ### Scope
 
@@ -17,15 +21,15 @@ Primary task.
 
 ### Preconditions
 
-Database contains data on capital cities.
+If required, a continent or region must be declared. The database must contain the number of people that speak each language in the world.
 
-### Success End Condition
+### A successful end condition
 
-Population report is produced.
+A report that accurately shows the number of people that speak each language in the world.
 
-### Failed End Condition
+### A failed end condition
 
-No report is produced.
+No report is produced. An inaccurate report is produced. The program crashes.
 
 ### Primary Actor
 
@@ -33,14 +37,14 @@ Data scientist.
 
 ### Trigger
 
-Analyst wants to produce a population report.
+An analyst wants to produce a population report.
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organization requests report on the number of people speaking specific languages
-2. Data scientist lets the system produces the desired report.
-3. The report is being displayed to the data scientist.
-4. The report is forwarded to the organization.
+1. The company requests a report on the number of people speaking specific languages in the world.
+2. A data scientist lets the system produces the desired report.
+3. The report is then forwarded to the company.
+
 
 ## EXTENSIONS
 

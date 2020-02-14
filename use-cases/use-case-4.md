@@ -1,11 +1,15 @@
 
-# USE CASE: 4 Produce a population report
+# USE CASE 4: Produce a population report
 
 ## CHARACTERISTIC INFORMATION
 
-### Goal in Context
+### Abstract
 
-As an *data scientist* I want *to produce a population report on all capital cities* so that *I can get information about the name, total population and population in and outside cities*.  
+As a *data scientist* I want *to produce a population report on all capital cities* so that *I can get information about the name, total population and population in and outside of cities*.  
+
+### Motivation
+
+To provide a report for the company containing vital up-to-date information regarding the population of a specific capital city.
 
 ### Scope
 
@@ -17,15 +21,15 @@ Primary task.
 
 ### Preconditions
 
-Database contains data on capital cities.
+If required, a continent or region must be declared. The database must contain all associated data points about the population of a capital city.
 
-### Success End Condition
+### A successful end condition
 
-Population report is produced.
+A report that shows the correct data points for a capital city and its population.
 
-### Failed End Condition
+### A failed end condition
 
-No report is produced.
+No report is produced. An inaccurate report is produced. The program crashes.
 
 ### Primary Actor
 
@@ -33,14 +37,13 @@ Data scientist.
 
 ### Trigger
 
-Analyst wants to produce a population report.
+An analyst wants to produce a population report.
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organization requests report on capital cities, possibly for specific region, country or continent.
-2. Data scientist lets the system produces a population report based on requested values.
-3. The report is being displayed to the data scientist.
-4. The report is forwarded to the organization.
+1. The company requests information regarding the population of capital cities.
+2. A data scientist lets the system produce a population report based on requested values.
+3. The report is then forwarded to the company.
 
 ## EXTENSIONS
 

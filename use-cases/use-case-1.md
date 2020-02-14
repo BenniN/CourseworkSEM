@@ -1,11 +1,15 @@
 
-# USE CASE: 1 Produce a Report on all Cities
+# USE CASE 1: Produce a report on all of the cities.
 
 ## CHARACTERISTIC INFORMATION
 
-### Goal in Context
+### Abstract
 
-As an *data scientist* I want *to produce a report on all cities in the world, a continent or region* so that *I can create further statistics for the organization*. 
+As a *data scientist* I want *to produce a report displaying all of the cities in the world, a continent or a region* so that *I can create further statistics, and analysis can be performed*. 
+
+### Motivation
+
+To provide a report for the company containing vital up-to-date information regarding data points about the cities around the world.
 
 ### Scope
 
@@ -17,15 +21,15 @@ Primary task.
 
 ### Preconditions
 
-Database contains data on population for the whole world.
+If required, a continent or region must be declared. The database must contain all of the cities in the world, with their associated continent and region.
 
-### Success End Condition
+### A successful end condition
 
-A report on all cities has been produced.
+A report that shows all of the cities for a specified region/continent or all the entire world is produced.
 
-### Failed End Condition
+### A failed end condition
 
-No report is produced.
+No report is produced. An inaccurate report is produced. The program crashes.
 
 ### Primary Actor
 
@@ -33,13 +37,13 @@ Data scientist.
 
 ### Trigger
 
-Analyst wants to get the latest population in cities.
+An analyst wants to get the latest population of cities.
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organization requests information on population in cities.
-2. Data scientist lets the system produces a report on all cities.
-3. The report is being forwarded to the organization.
+1. The company requests information regarding the population of cities.
+2. A data scientist lets the system produce a report on all of the cities.
+3. The report is then forwarded to the company.
 
 ## EXTENSIONS
 
