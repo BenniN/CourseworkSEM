@@ -1,5 +1,5 @@
 
-# USE CASE 2: Produce a report on all of the countries.
+# USE CASE 2: Produce a report on all of the countries
 
 ## CHARACTERISTIC INFORMATION
 

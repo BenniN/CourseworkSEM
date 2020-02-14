@@ -1,5 +1,5 @@
 
-# USE CASE 4: Produce a population report.
+# USE CASE 4: Produce a population report
 
 ## CHARACTERISTIC INFORMATION
 
