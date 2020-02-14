@@ -1,5 +1,5 @@
 
-# USE CASE 1: Produce a report on all of the cities.
+# USE CASE 1: Produce a report on all of the cities
 
 ## CHARACTERISTIC INFORMATION
 

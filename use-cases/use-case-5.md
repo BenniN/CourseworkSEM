@@ -1,5 +1,5 @@
 
-# USE CASE 5: Produce a report on the number of people with specific languages 
+# USE CASE 5: Produce a report on the number of people with specific languages.
 
 ## CHARACTERISTIC INFORMATION
 
