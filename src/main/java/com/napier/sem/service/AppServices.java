@@ -101,4 +101,12 @@ public interface AppServices {
     List<CityReport> getNCitiesByLargestPopulationToSmallestWhereNisSelectedByUser(int limitsql) throws SQLException;
 
     List<CapitalCityReport> getAllCapitalCitiesfromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws  SQLException;
+
+    List<CityReport> getAllCitiesInAContinentOrderLargestPopToSmallest(String Continentsql) throws SQLException;
+    /**
+     * Generates a list of reports with all of the cities in a user specified continent, organised from largest to smallest
+     * @param Continentsql is the input from the user of which continent should be presented
+     * @return an ordered list from largest population to smallest population of that continent
+     * @throws SQLException if report could not be generated
+     */
 }
