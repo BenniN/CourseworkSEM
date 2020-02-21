@@ -8,8 +8,6 @@ import com.napier.sem.ui.SimpleConsoleUI;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.sql.SQLException;
-
 public class ApplicationInitializer {
 
     private static final Logger LOGGER = LogManager.getLogger(ApplicationInitializer.class);
@@ -39,14 +37,13 @@ public class ApplicationInitializer {
         boolean connected = false;
         while (retryCounter > 0) {
             LOGGER.debug("Connecting to database...");
-            try {
-                dataLayer.connect();
-                connected = true;
+            connected = dataLayer.initialize();
+            if (connected) {
                 break;
-            } catch (SQLException e) {
-                retryCounter--; // we could not connect, decrement counter
-                LOGGER.debug("... connection could not be established! " + retryCounter + " times to go");
             }
+            retryCounter--; // we could not connect, decrement counter
+            LOGGER.debug("... connection could not be established! " + retryCounter + " times to go");
+
             try {
                 Thread.sleep(WAITING_TIME_IN_BETWEEN);
             } catch (InterruptedException e) {

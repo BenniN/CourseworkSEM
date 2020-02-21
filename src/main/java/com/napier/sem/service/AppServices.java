@@ -1,10 +1,7 @@
 package com.napier.sem.service;
 
-import com.napier.sem.reports.CapitalCityReport;
-import com.napier.sem.reports.CityReport;
-import com.napier.sem.reports.CountryReport;
+import com.napier.sem.reports.*;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -14,100 +11,207 @@ public interface AppServices {
 
     /**
      * Generates a list of reports with all the countries in the world organised by largest population to smallest.
+     *
      * @return a ordered list containing all country reports
-     * @throws SQLException if report could not be generated
      */
-    List<CountryReport> getAllCountriesOrderedByLargestPopulationToSmallest() throws SQLException;
+    List<CountryReport> getAllCountriesOrderedByLargestPopulationToSmallest();
 
     /**
-     * Generates a list of reports with all cities in the world organized by largest population to smallest
-     * @return a ordered list containing all cities in the world
-     * @throws SQLException if report could not be generated
+     * Generates a list of reports with all countries for a specified continent ordered by largest population to smallest.
+     *
+     * @param continent the continent to filter for
+     * @return an ordered list containing all countries for the specified continent
      */
-    List<CityReport> getAllCitiesInTheWorldOrderedByLargestPopulationToSmallest() throws SQLException;
+    List<CountryReport> getAllCountriesInAContinentOrderedByLargestPopulationToSmallest(String continent);
 
     /**
-     * Generates a list of reports with all cities in a continent organized by largest population to smallest
-     * @param continentsql is the input for a specific continent
-     * @return a ordered list containing all cities in the selected continent
-     * @throws SQLException if report could not be generated
+     * Generates a list of reports with all countries in a specified region ordered by largest population to smallest
+     *
+     * @param region the region to filter for
+     * @return an ordered list containing all countries for the specified region
      */
-    List<CityReport> getAllCitiesFromContinentOrderedByLargestPopulationToSmallest(String continentsql ) throws SQLException;
+    List<CountryReport> getAllCountriesInARegionOrderedByLargestPopulationToSmallest(String region);
 
     /**
-     * Generates a list of reports with all cities in a region organized by largest population to smallest
-     * @param regionsql is the input for a specific region
-     * @return a ordered list containing all cities in the selected region
-     * @throws SQLException if report could not be generated
-     */
-    List<CityReport> getAllCitiesFromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws SQLException;
-
-    /**
-     * Generates a list of reports with all cities in a country organized by largest population to smallest
-     * @param countrysql is the input for a specific country
-     * @return a ordered list containing all cities in the selected country
-     * @throws SQLException if report could not be generated
-     */
-    List<CityReport> getAllCitiesFromCountryOrderedByLargestPopulationToSmallest(String countrysql) throws SQLException;
-
-    /**
-     * Generates a list of reports with all cities in a district organized by largest population to smallest
-     * @param distrcitsql is the input for a specific district
-     * @return a ordered list containing all cities in the selected district
-     * @throws SQLException if report could not be generated
-     */
-    List<CityReport> getAllCitiesFromDistrictOrderedByLargestPopulationToSmallest(String distrcitsql) throws SQLException;
-
-    /**
-     * Generates a list of reports with N countries in the world organized by largest population to smallest
-     * @param limitsql is the input for the amount of countries which should be presented
+     * Generates a list of reports with countries in the world organized by largest population to smallest
+     *
+     * @param limit is the input for the amount of countries which should be presented
      * @return a ordered list containing N countries in the world
-     * @throws SQLException if report could not be generated
      */
-    List<CountryReport> getNCountriesFromWorldOrderedByLargestPopulationToSmallestNisSelectedByUser(int limitsql) throws SQLException;
+    List<CountryReport> getCountriesFromWorldOrderedByLargestPopulationToSmallest(int limit);
 
     /**
      * Generates a list of reports with N countries in a continent organized by largest population to smallest
-     * @param continentsql is the input for a specific continent
-     * @param limitsql  is the input for the amount of countries in the specific continent which should be presented
+     *
+     * @param continent is the input for a specific continent
+     * @param limit     is the input for the amount of countries in the specific continent which should be presented
      * @return a ordered list containing N countries of the selected continent
-     * @throws SQLException if report could not be generated
      */
-    List<CountryReport> getNCountriesFromContinentOrderedByLargestPopulationToSmallestNisSelectedByUser(String continentsql, int limitsql) throws SQLException;
+    List<CountryReport> getCountriesFromContinentOrderedByLargestPopulationToSmallest(String continent, int limit);
 
     /**
      * Generates a list of reports with N countries in a region organized by largest population to smallest
-     * @param regionsql is the input to specify the region
-     * @param limitsql  is the input for the amount of countries in the specific region which should be presented
+     *
+     * @param region is the input to specify the region
+     * @param limit  is the input for the amount of countries in the specific region which should be presented
      * @return a ordered list containing N countries of the selected region
-     * @throws SQLException if report could not be generated
      */
-    List<CountryReport> getNCountriesFromRegionOrderedByLargestPopulationToSmallestNisSelectedByUser(String regionsql, int limitsql) throws SQLException;
+    List<CountryReport> getCountriesFromRegionOrderedByLargestPopulationToSmallest(String region, int limit);
 
     /**
-     * Generates a list of reports with N Capital Cities in the world organized by largest population to smallest
-     * @param limitsql is the input for the amount of Capital Cities which should be presented
-     * @return a ordered list containing N Capital Cities of the world
-     * @throws SQLException if report could not be generated
+     * Generates a list of reports with all cities in the world organized by largest population to smallest
+     *
+     * @return a ordered list containing all cities in the world
      */
-    List<CapitalCityReport> getNCapitalCitiesByLargestPopulationToSmallestNisSelectedByUser(int limitsql) throws SQLException;
-
-    /**
-     * Generates a list of reports with N Cities in the world organized by largest population to smallest
-     * @param limitsql is the input for the amount of Cities which should be presented
-     * @return a ordered list containing N Cities of the world
-     * @throws SQLException if report could not be generated
-     */
-    List<CityReport> getNCitiesByLargestPopulationToSmallestWhereNisSelectedByUser(int limitsql) throws SQLException;
-
-    List<CapitalCityReport> getAllCapitalCitiesfromRegionOrderedByLargestPopulationToSmallest(String regionsql) throws  SQLException;
+    List<CityReport> getAllCitiesInTheWorldOrderedByLargestPopulationToSmallest();
 
     /**
      * Generates a list of reports with all of the cities in a user specified continent, organised from largest to smallest
-     * @param Continentsql is the input from the user of which continent should be presented
+     *
+     * @param continent is the input from the user of which continent should be presented
      * @return an ordered list from largest population to smallest population of that continent
-     * @throws SQLException if report could not be generated
      */
-    List<CityReport> getAllCitiesInAContinentOrderLargestPopToSmallest(String Continentsql) throws SQLException;
+    List<CityReport> getAllCitiesFromContinentOrderedByLargestPopulationToSmallest(String continent);
+
+    /**
+     * Generates a list of reports with all cities in a region organized by largest population to smallest
+     *
+     * @param region is the input for a specific region
+     * @return a ordered list containing all cities in the selected region
+     */
+    List<CityReport> getAllCitiesFromRegionOrderedByLargestPopulationToSmallest(String region);
+
+    /**
+     * Generates a list of reports with all cities in a country organized by largest population to smallest
+     *
+     * @param country is the input for a specific country
+     * @return a ordered list containing all cities in the selected country
+     */
+    List<CityReport> getAllCitiesFromCountryOrderedByLargestPopulationToSmallest(String country);
+
+    /**
+     * Generates a list of reports with all cities in a district organized by largest population to smallest
+     *
+     * @param district is the input for a specific district
+     * @return a ordered list containing all cities in the selected district
+     */
+    List<CityReport> getAllCitiesFromDistrictOrderedByLargestPopulationToSmallest(String district);
+
+    /**
+     * Generates a list of reports with N Cities in the world organized by largest population to smallest
+     *
+     * @param limit is the input for the amount of Cities which should be presented
+     * @return a ordered list containing N Cities of the world
+     */
+    List<CityReport> getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(int limit);
+
+    List<CityReport> getCitiesInAContinentOrganisedByLargestPopulationToSmallest(String continent, int limit);
+
+    List<CityReport> getCitiesInARegionOrganisedByLargestPopulationToSmallest(String region, int limit);
+
+    List<CityReport> getCitiesInACountryOrganisedByLargestPopulationToSmallest(String country, int limit);
+
+    List<CityReport> getCitiesInADistrictOrganisedByLargestPopulationToSmallest(String district, int limit);
+
+
+    List<CapitalCityReport> getAllCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest();
+
+    List<CapitalCityReport> getAllCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest(String continent);
+
+    /**
+     * Generates a list of reports with all capital cities from a certain region ordered by largest population to smallest.
+     *
+     * @param region the region to filter for
+     * @return an ordered list of capital cities for the specified region
+     */
+    List<CapitalCityReport> getAllCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest(String region);
+
+    /**
+     * Generates a list of reports with N Capital Cities in the world organized by largest population to smallest
+     *
+     * @param limit is the input for the amount of Capital Cities which should be presented
+     * @return a ordered list containing N Capital Cities of the world
+     */
+    List<CapitalCityReport> getCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest(int limit);
+
+    /**
+     * Generates a list of capital city reports in a specified continent organised by largest population to smallest.
+     *
+     * @param continent the continent to get all capital cities from
+     * @param limit     the max amount of reports returned
+     * @return an ordered list of reports with all capital cities for that continent
+     */
+    List<CapitalCityReport> getCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest(String continent, int limit);
+
+    /**
+     * Generates a list of capital city reports for a specific region organised by largest population to smallest.
+     * @param region the region to get all capital cities from
+     * @param limit the max amount of reports returned
+     * @return an ordered list of reports with all capital cities for that region
+     */
+    List<CapitalCityReport> getCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest(String region, int limit);
+
+
+    /**
+     * @return a list of population reports for each continent.
+     */
+    List<PopulationReport> getPopulationOfPeopleInEachContinent();
+
+    /**
+     * @return a list of population reports for each regions.
+     */
+    List<PopulationReport> getPopulationOfPeopleInEachRegion();
+
+    /**
+     * @return a list of population reports for each country.
+     */
+    List<PopulationReport> getPopulationOfPeopleInEachCountry();
+
+    /**
+     * @return a population report for the whole world.
+     */
+    PopulationReport getThePopulationOfTheWorld();
+
+    /**
+     * Produces a population report for a specified continent.
+     * @param continent the continent to generate the population report for
+     * @return a population report for that continent.
+     */
+    PopulationReport getThePopulationOfAContinent(String continent);
+
+    /**
+     * Produces a population report for a specified region.
+     * @param region the region to generate the population report for
+     * @return a population report for that region
+     */
+    PopulationReport getThePopulationOfARegion(String region);
+
+    /**
+     * Produces a population reports for a specified country
+     * @param country the country to generate the population report for
+     * @return a population report for that country
+     */
+    PopulationReport getThePopulationOfACountry(String country);
+
+    /**
+     * Produces a population report for a district.
+     * @param district the district to generate the population report for
+     * @return a population report for that district
+     */
+    PopulationReport getThePopulationOfADistrict(String district);
+
+    /**
+     * Produces a population report for a city
+     * @param city the city to generate the population report for
+     * @return a population report for that city
+     */
+    PopulationReport getThePopulationOfACity(String city);
+
+    /**
+     * Produces a language reports for specified languages.
+     * @param languages the languages to create the 
+     * @return a language report for that languages
+     */
+    LanguageReport getLanguageReport(String[] languages);
 
 }
