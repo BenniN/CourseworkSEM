@@ -107,44 +107,50 @@ public interface AppServices {
 
     /**
      * Produces a list of city reports for cities in a continent organised by largest population to smallest.
+     *
      * @param continent the continent to get city reports from
-     * @param limit the max amount of reports returned
+     * @param limit     the max amount of reports returned
      * @return an ordered list for city reports for that continent
      */
     List<CityReport> getCitiesInAContinentOrganisedByLargestPopulationToSmallest(String continent, int limit);
 
     /**
      * Produces a list of city reports for cities in a region organised by largest population to smallest.
+     *
      * @param region the region to get the city reports from
-     * @param limit the max amount of reports returned
+     * @param limit  the max amount of reports returned
      * @return an ordered list of city reports for that region
      */
     List<CityReport> getCitiesInARegionOrganisedByLargestPopulationToSmallest(String region, int limit);
 
     /**
      * Produces a list of city reports for cities in a country organised by largest population to smallest.
+     *
      * @param country the country to get the city reports from
-     * @param limit the max amount of reports returned
+     * @param limit   the max amount of reports returned
      * @return an ordered list of city reports for that country
      */
     List<CityReport> getCitiesInACountryOrganisedByLargestPopulationToSmallest(String country, int limit);
 
     /**
      * Produces a list of city reports for cities in a district organised by largest population to smallest.
+     *
      * @param district the district to get the city reports from
-     * @param limit the max amount of reports returned
+     * @param limit    the max amount of reports returned
      * @return an ordered list of city reports for that district
      */
     List<CityReport> getCitiesInADistrictOrganisedByLargestPopulationToSmallest(String district, int limit);
 
     /**
      * Produces a list of capital city reports for all capital cities in the world organised by largest population to smallest.
+     *
      * @return an ordered list of capital city reports
      */
     List<CapitalCityReport> getAllCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest();
 
     /**
      * Produces a list of capital city reports for capital cities in a continent organised by largest population to smallest.
+     *
      * @param continent the continent to generate the capital city reports from
      * @return an ordered list of capital city reports for that continent
      */
@@ -177,8 +183,9 @@ public interface AppServices {
 
     /**
      * Generates a list of capital city reports for a specific region organised by largest population to smallest.
+     *
      * @param region the region to get all capital cities from
-     * @param limit the max amount of reports returned
+     * @param limit  the max amount of reports returned
      * @return an ordered list of reports with all capital cities for that region
      */
     List<CapitalCityReport> getCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest(String region, int limit);
@@ -206,6 +213,7 @@ public interface AppServices {
 
     /**
      * Produces a population report for a specified continent.
+     *
      * @param continent the continent to generate the population report for
      * @return a population report for that continent.
      */
@@ -213,6 +221,7 @@ public interface AppServices {
 
     /**
      * Produces a population report for a specified region.
+     *
      * @param region the region to generate the population report for
      * @return a population report for that region
      */
@@ -220,6 +229,7 @@ public interface AppServices {
 
     /**
      * Produces a population reports for a specified country
+     *
      * @param country the country to generate the population report for
      * @return a population report for that country
      */
@@ -227,6 +237,7 @@ public interface AppServices {
 
     /**
      * Produces a population report for a district.
+     *
      * @param district the district to generate the population report for
      * @return a population report for that district
      */
@@ -234,6 +245,7 @@ public interface AppServices {
 
     /**
      * Produces a population report for a city
+     *
      * @param city the city to generate the population report for
      * @return a population report for that city
      */
@@ -241,6 +253,7 @@ public interface AppServices {
 
     /**
      * Produces a language reports for specified languages.
+     *
      * @param languages the languages to create the
      * @return a language report for that languages
      */
