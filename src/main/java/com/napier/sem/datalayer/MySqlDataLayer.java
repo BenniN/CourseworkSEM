@@ -287,6 +287,28 @@ public class MySqlDataLayer implements DataLayer {
     }
 
     /**
+     * This is helper method for generating population reports.
+     *
+     * @param sql   the sql to generate the reports from.<br/>
+     *              <strong>Note</strong> that the sql's column names must match the followings:
+     *              <ul>
+     *              <li>name</li>
+     *              <li>population_total</li>
+     *              <li>population_cities</li>
+     *              </ul>
+     * @param limit the max count of generated reports
+     * @return a list containing the reports
+     */
+    private List<PopulationReport> producePopulationReport(String sql, int limit) {
+        return produceReport(sql, limit, resultSet -> {
+           String name = resultSet.getString("name");
+           int populationTotal = resultSet.getInt("population_total");
+           int populationCities = resultSet.getInt("population_cities");
+           return new PopulationReport(name, populationTotal, populationCities);
+        });
+    }
+
+    /**
      * Generic helper method for generating a list with reports.
      *
      * @param sql      the sql to execute
