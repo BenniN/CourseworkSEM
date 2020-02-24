@@ -257,6 +257,6 @@ public interface AppServices {
      * @param languages the languages to create the
      * @return a language report for that languages
      */
-    LanguageReport getLanguageReport(String[] languages);
+    List<LanguageReport> getLanguageReport(String[] languages);
 
 }

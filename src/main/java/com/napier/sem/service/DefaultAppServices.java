@@ -174,7 +174,7 @@ public class DefaultAppServices implements AppServices {
     }
 
     @Override
-    public LanguageReport getLanguageReport(String[] languages) {
+    public List<LanguageReport> getLanguageReport(String[] languages) {
         return dataLayer.getLanguageReport(languages);
     }
 }

@@ -210,8 +210,29 @@ public class MySqlDataLayer implements DataLayer {
     }
 
     @Override
-    public LanguageReport getLanguageReport(String[] languages) {
-        throw new UnsupportedOperationException("not yet implemented");
+    public List<LanguageReport> getLanguageReport(String[] languages) {
+        String langList = buildLanguageSqlList(languages);
+        return produceLanguageReport("SELECT cl.Language,\n" +
+                "       sum(country.Population * cl.Percentage / 100) as total,\n" +
+                "       sum(country.Population * cl.Percentage / 100) / (SELECT sum(country.Population) FROM country) * 100 as percentage\n" +
+                "FROM countrylanguage cl\n" +
+                "         JOIN country ON cl.CountryCode = country.Code\n" +
+                "WHERE cl.Language in (" + langList + ")\n" +
+                "GROUP BY cl.Language\n" +
+                "ORDER BY total DESC;");
+    }
+
+    private String buildLanguageSqlList(String[] languages) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < languages.length; i++) {
+            if (i > 0) {
+                builder.append(", ");
+            }
+            builder.append('\'');
+            builder.append(languages[i]);
+            builder.append('\'');
+        }
+        return builder.toString();
     }
 
     /**
@@ -308,6 +329,21 @@ public class MySqlDataLayer implements DataLayer {
            int populationTotal = resultSet.getInt("population_total");
            int populationCities = resultSet.getInt("population_cities");
            return new PopulationReport(name, populationTotal, populationCities);
+        });
+    }
+
+    /**
+     * Helper method for creating language reports
+     * @param sql the sql to generate the reports from.
+     *            Use language, speakers and percentage as column names
+     * @return a list containing the reports
+     */
+    private List<LanguageReport> produceLanguageReport(String sql) {
+        return produceReport(sql, DataLayer.NO_LIMIT, resultSet -> {
+           String language = resultSet.getString("language");
+           int speakers = resultSet.getInt("speakers");
+           double percentage = resultSet.getDouble("percentage");
+           return new LanguageReport(language, speakers, percentage);
         });
     }
 
