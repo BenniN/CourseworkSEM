@@ -144,32 +144,32 @@ public class DefaultAppServices implements AppServices {
     }
 
     @Override
-    public PopulationReport getThePopulationOfTheWorld() {
+    public SimplePopulationReport getThePopulationOfTheWorld() {
         return dataLayer.getThePopulationOfTheWorld();
     }
 
     @Override
-    public PopulationReport getThePopulationOfAContinent(String continent) {
+    public SimplePopulationReport getThePopulationOfAContinent(String continent) {
         return dataLayer.getThePopulationOfAContinent(continent);
     }
 
     @Override
-    public PopulationReport getThePopulationOfARegion(String region) {
+    public SimplePopulationReport getThePopulationOfARegion(String region) {
         return dataLayer.getThePopulationOfARegion(region);
     }
 
     @Override
-    public PopulationReport getThePopulationOfACountry(String country) {
+    public SimplePopulationReport getThePopulationOfACountry(String country) {
         return dataLayer.getThePopulationOfACountry(country);
     }
 
     @Override
-    public PopulationReport getThePopulationOfADistrict(String district) {
+    public SimplePopulationReport getThePopulationOfADistrict(String district) {
         return dataLayer.getThePopulationOfADistrict(district);
     }
 
     @Override
-    public PopulationReport getThePopulationOfACity(String city) {
+    public SimplePopulationReport getThePopulationOfACity(String city) {
         return dataLayer.getThePopulationOfACity(city);
     }
 

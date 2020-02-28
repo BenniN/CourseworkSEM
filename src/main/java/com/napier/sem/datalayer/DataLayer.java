@@ -128,42 +128,42 @@ public interface DataLayer {
     /**
      * @return a population report for the whole world.
      */
-    PopulationReport getThePopulationOfTheWorld();
+    SimplePopulationReport getThePopulationOfTheWorld();
 
     /**
      * Produces a population report for a specified continent.
      * @param continent the continent to generate the population report for
      * @return a population report for that continent.
      */
-    PopulationReport getThePopulationOfAContinent(String continent);
+    SimplePopulationReport getThePopulationOfAContinent(String continent);
 
     /**
      * Produces a population report for a specified region.
      * @param region the region to generate the population report for
      * @return a population report for that region
      */
-    PopulationReport getThePopulationOfARegion(String region);
+    SimplePopulationReport getThePopulationOfARegion(String region);
 
     /**
      * Produces a population reports for a specified country
      * @param country the country to generate the population report for
      * @return a population report for that country
      */
-    PopulationReport getThePopulationOfACountry(String country);
+    SimplePopulationReport getThePopulationOfACountry(String country);
 
     /**
      * Produces a population report for a district.
      * @param district the district to generate the population report for
      * @return a population report for that district
      */
-    PopulationReport getThePopulationOfADistrict(String district);
+    SimplePopulationReport getThePopulationOfADistrict(String district);
 
     /**
      * Produces a population report for a city
      * @param city the city to generate the population report for
      * @return a population report for that city
      */
-    PopulationReport getThePopulationOfACity(String city);
+    SimplePopulationReport getThePopulationOfACity(String city);
 
     /**
      * Produces a language reports for specified languages.

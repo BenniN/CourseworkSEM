@@ -180,32 +180,32 @@ public class MySqlDataLayer implements DataLayer {
     }
 
     @Override
-    public PopulationReport getThePopulationOfTheWorld() {
+    public SimplePopulationReport getThePopulationOfTheWorld() {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
-    public PopulationReport getThePopulationOfAContinent(String continent) {
+    public SimplePopulationReport getThePopulationOfAContinent(String continent) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
-    public PopulationReport getThePopulationOfARegion(String region) {
+    public SimplePopulationReport getThePopulationOfARegion(String region) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
-    public PopulationReport getThePopulationOfACountry(String country) {
+    public SimplePopulationReport getThePopulationOfACountry(String country) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
-    public PopulationReport getThePopulationOfADistrict(String district) {
+    public SimplePopulationReport getThePopulationOfADistrict(String district) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
-    public PopulationReport getThePopulationOfACity(String city) {
+    public SimplePopulationReport getThePopulationOfACity(String city) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
@@ -325,26 +325,48 @@ public class MySqlDataLayer implements DataLayer {
      */
     private List<PopulationReport> producePopulationReport(String sql, int limit) {
         return produceReport(sql, limit, resultSet -> {
-           String name = resultSet.getString("name");
-           int populationTotal = resultSet.getInt("population_total");
-           int populationCities = resultSet.getInt("population_cities");
-           return new PopulationReport(name, populationTotal, populationCities);
+            String name = resultSet.getString("name");
+            int populationTotal = resultSet.getInt("population_total");
+            int populationCities = resultSet.getInt("population_cities");
+            return new PopulationReport(name, populationTotal, populationCities);
         });
     }
 
     /**
      * Helper method for creating language reports
+     *
      * @param sql the sql to generate the reports from.
      *            Use language, speakers and percentage as column names
      * @return a list containing the reports
      */
     private List<LanguageReport> produceLanguageReport(String sql) {
         return produceReport(sql, DataLayer.NO_LIMIT, resultSet -> {
-           String language = resultSet.getString("language");
-           int speakers = resultSet.getInt("speakers");
-           double percentage = resultSet.getDouble("percentage");
-           return new LanguageReport(language, speakers, percentage);
+            String language = resultSet.getString("language");
+            int speakers = resultSet.getInt("speakers");
+            double percentage = resultSet.getDouble("percentage");
+            return new LanguageReport(language, speakers, percentage);
         });
+    }
+
+    /**
+     * Helper method for generating a simple population report.
+     * The specified sql will be executed but only the first result will be returned
+     * or null if there is no result. <br/>
+     * <strong>Note</strong> that the sql column names must match 'name' and 'population' to get proper results.
+     *
+     * @param sql the sql to execute
+     * @return the first result of that sql as simple population report, or null if there are no results
+     */
+    private SimplePopulationReport produceSimplePopulationReport(String sql) {
+        List<SimplePopulationReport> reports = produceReport(sql, 1, resultSet -> {
+            String name = resultSet.getString("name");
+            int population = resultSet.getInt("population");
+            return new SimplePopulationReport(name, population);
+        });
+        if (reports.isEmpty()) {
+            return null;
+        }
+        return reports.get(0);
     }
 
     /**
