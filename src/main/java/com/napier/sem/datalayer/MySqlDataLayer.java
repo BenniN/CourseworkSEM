@@ -201,7 +201,8 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public SimplePopulationReport getThePopulationOfADistrict(String district) {
-        throw new UnsupportedOperationException("not yet implemented");
+        return produceSimplePopulationReport("SELECT district as name, SUM(population) as population from city\n" +
+                "where district = '" +district + "'");
     }
 
     @Override
