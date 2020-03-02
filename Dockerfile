@@ -1,4 +1,4 @@
 FROM openjdk:latest
-COPY ./target/coursework-0.3.0.1-jar-with-dependencies.jar /tmp
+COPY ./target/sem_coursework.jar.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "coursework-0.3.0.1-jar-with-dependencies.jar"]
+ENTRYPOINT ["java", "-jar", "sem_coursework.jar", "db", "root", "example"]

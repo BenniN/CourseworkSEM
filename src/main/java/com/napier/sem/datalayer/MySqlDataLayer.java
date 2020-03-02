@@ -4,11 +4,9 @@ import com.napier.sem.reports.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * This implementation of the <code>DataLayer</code> provides
@@ -31,30 +29,24 @@ public class MySqlDataLayer implements DataLayer {
      * from the connection.properties file.
      * No connection will be set up at this point!
      */
-    public MySqlDataLayer() {
-        Properties connectionProps = new Properties();
-        try {
-            LOGGER.debug("Loading connection properties file");
-
-            // read connection properties from file
-            connectionProps.load(getClass().getResourceAsStream("/connection.properties"));
-
-            // read properties
-            this.host = connectionProps.getProperty("db_host");
-            this.user = connectionProps.getProperty("db_user");
-            this.password = connectionProps.getProperty("db_password");
-
-            LOGGER.debug("Successfully read connection properties");
-        } catch (IOException e) {
-            LOGGER.error("Error while loading / reading properties file: " + e.getMessage());
-        }
+    public MySqlDataLayer(String host, String user, String password) {
+        this.host = host;
+        this.user = user;
+        this.password = password;
     }
 
     @Override
     public boolean initialize() {
+        // load driver
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Driver could not be loaded!");
+        }
         DriverManager.setLoginTimeout(5); // five seconds timeout
         try {
-            this.connection = DriverManager.getConnection(this.host, this.user, this.password);
+
+            this.connection = DriverManager.getConnection("jdbc:mysql://" + this.host + "/world?useSSL=false", this.user, this.password);
             LOGGER.debug("Successfully established connection to host");
             return true;
         } catch (SQLException e) {

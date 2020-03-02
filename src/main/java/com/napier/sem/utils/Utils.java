@@ -1,7 +1,5 @@
 package com.napier.sem.utils;
 
-import com.napier.sem.Main;
-
 import java.io.*;
 
 /**
@@ -17,7 +15,7 @@ public class Utils {
     public static String getFileAsString(String filename) {
         try {
             StringBuilder resultStringBuilder = new StringBuilder();
-            InputStreamReader reader = new InputStreamReader(Main.class.getResourceAsStream(filename));
+            InputStreamReader reader = new InputStreamReader(Utils.class.getResourceAsStream(filename));
             try (BufferedReader br = new BufferedReader(reader)) {
                 String line;
                 while ((line = br.readLine()) != null) {
