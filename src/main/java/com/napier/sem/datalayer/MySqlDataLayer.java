@@ -162,9 +162,8 @@ public class MySqlDataLayer implements DataLayer {
 
 
     @Override
-    public List<PopulationReport> getPopulationOfPeopleInEachContinent(String continent) {
-        return producePopulationReport("select sum(population) from country\n" +
-                "where continent = " + continent + " ;", DataLayer.NO_LIMIT);
+    public List<PopulationReport> getPopulationOfPeopleInEachContinent() {
+        throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
@@ -187,7 +186,8 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public SimplePopulationReport getThePopulationOfAContinent(String continent) {
-        throw new UnsupportedOperationException("not yet implemented");
+        return produceSimplePopulationReport("select sum(population) as population from country\n" +
+                "where continent = " + continent + ";");
     }
 
     @Override
