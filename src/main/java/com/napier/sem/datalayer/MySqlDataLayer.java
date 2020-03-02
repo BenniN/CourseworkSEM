@@ -46,7 +46,7 @@ public class MySqlDataLayer implements DataLayer {
         DriverManager.setLoginTimeout(5); // five seconds timeout
         try {
 
-            this.connection = DriverManager.getConnection("jdbc:mysql://" + this.host + "/world?useSSL=false", this.user, this.password);
+            this.connection = DriverManager.getConnection("jdbc:mysql://" + this.host + "/world?allowPublicKeyRetrieval=true&useSSL=false", this.user, this.password);
             LOGGER.debug("Successfully established connection to host");
             return true;
         } catch (SQLException e) {
