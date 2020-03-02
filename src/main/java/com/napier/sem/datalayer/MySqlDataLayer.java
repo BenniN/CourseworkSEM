@@ -186,7 +186,7 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public SimplePopulationReport getThePopulationOfAContinent(String continent) {
-        return produceSimplePopulationReport("select sum(population) as population from country\n" +
+        return produceSimplePopulationReport("select continent as name, sum(population) as population from country\n" +
                 "where continent = " + continent + ";");
     }
 
