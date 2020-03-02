@@ -210,7 +210,7 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public SimplePopulationReport getThePopulationOfACity(String city) {
-        return produceSimplePopulationReport("select population from city\n" +
+        return produceSimplePopulationReport("select city as name, population as population from city\n" +
                 "where Name  = " + city + ";");
     }
 
