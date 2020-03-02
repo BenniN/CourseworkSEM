@@ -94,7 +94,7 @@ public class MySqlDataLayer implements DataLayer {
         return produceCityReport("select c.name, c.population, c.district, cn.Name as country\n" +
                 "FROM city c\n" +
                 "JOIN country cn ON cn.Code = c.CountryCode\n" +
-                "ORDER BY population DESC", limit);
+                "ORDER BY population DESC;", limit);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class MySqlDataLayer implements DataLayer {
                 "FROM city c\n" +
                 "JOIN country cn ON cn.Code = c.CountryCode\n" +
                 "WHERE cn.Continent = '" + continent + "'\n" +
-                "ORDER BY population DESC", limit);
+                "ORDER BY population DESC;", limit);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class MySqlDataLayer implements DataLayer {
                 "FROM city c\n" +
                 "JOIN country cn ON cn.Code = c.CountryCode\n" +
                 "WHERE cn.Region = '" + region + "'\n" +
-                "ORDER BY population DESC", limit);
+                "ORDER BY population DESC;", limit);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class MySqlDataLayer implements DataLayer {
                 "FROM city c\n" +
                 "JOIN country cn ON cn.Code = c.CountryCode\n" +
                 "WHERE cn.Name = '" + country + "'\n" +
-                "ORDER BY population DESC", limit);
+                "ORDER BY population DESC;", limit);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class MySqlDataLayer implements DataLayer {
                 "FROM city c\n" +
                 "JOIN country cn ON cn.Code = c.CountryCode\n" +
                 "WHERE c.District = '" + district + "'\n" +
-                "ORDER BY population DESC", limit);
+                "ORDER BY population DESC;", limit);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class MySqlDataLayer implements DataLayer {
                 "FROM city c\n" +
                 "JOIN country co on c.CountryCode = co.code\n" +
                 "WHERE  co.Capital= c.id\n" +
-                "ORDER BY population DESC", limit);
+                "ORDER BY population DESC;", limit);
     }
 
     @Override
@@ -148,7 +148,7 @@ public class MySqlDataLayer implements DataLayer {
                 "FROM city c\n" +
                 "JOIN country co on c.CountryCode = co.code\n" +
                 "WHERE  co.Capital= c.id AND co.Continent = '" + continent + "'\n" +
-                "ORDER BY population DESC", limit);
+                "ORDER BY population DESC;", limit);
     }
 
     @Override
@@ -157,13 +157,14 @@ public class MySqlDataLayer implements DataLayer {
                 "FROM city c\n" +
                 "JOIN country co on c.CountryCode = co.code\n" +
                 "WHERE  co.Capital= c.id AND co.Region = '" + region + "'\n" +
-                "ORDER BY population DESC", limit);
+                "ORDER BY population DESC;", limit);
     }
 
 
     @Override
-    public List<PopulationReport> getPopulationOfPeopleInEachContinent() {
-        throw new UnsupportedOperationException("not yet implemented");
+    public List<PopulationReport> getPopulationOfPeopleInEachContinent(String continent) {
+        return producePopulationReport("select sum(population) from country\n" +
+                "where continent = " + continent + " ;", DataLayer.NO_LIMIT);
     }
 
     @Override
@@ -181,7 +182,7 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public SimplePopulationReport getThePopulationOfTheWorld() {
-        throw new UnsupportedOperationException("not yet implemented");
+        return produceSimplePopulationReport ("select sum(population) from country;");
     }
 
     @Override
@@ -191,12 +192,14 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public SimplePopulationReport getThePopulationOfARegion(String region) {
-        throw new UnsupportedOperationException("not yet implemented");
+        return produceSimplePopulationReport("select sum(population) from country\n" +
+                "where region = " + region + ";");
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfACountry(String country) {
-        throw new UnsupportedOperationException("not yet implemented");
+        return produceSimplePopulationReport("select population from country\n" +
+                "where Name  = " + country + " ;");
     }
 
     @Override
@@ -207,7 +210,8 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public SimplePopulationReport getThePopulationOfACity(String city) {
-        throw new UnsupportedOperationException("not yet implemented");
+        return produceSimplePopulationReport("select population from city\n" +
+                "where Name  = " + city + ";");
     }
 
     @Override
