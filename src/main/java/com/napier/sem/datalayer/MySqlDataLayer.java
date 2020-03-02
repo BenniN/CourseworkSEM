@@ -181,24 +181,24 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public SimplePopulationReport getThePopulationOfTheWorld() {
-        return produceSimplePopulationReport ("select sum(population) from country;");
+        return produceSimplePopulationReport ("select sum(population) as population from country;");
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfAContinent(String continent) {
-        return produceSimplePopulationReport("select sum(population) as population from country\n" +
+        return produceSimplePopulationReport("select continent as name, sum(population) as population from country\n" +
                 "where continent = " + continent + ";");
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfARegion(String region) {
-        return produceSimplePopulationReport("select sum(population) from country\n" +
+        return produceSimplePopulationReport("select region as name, sum(population) as population from country\n" +
                 "where region = " + region + ";");
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfACountry(String country) {
-        return produceSimplePopulationReport("select population from country\n" +
+        return produceSimplePopulationReport("select country as name, population as population from country\n" +
                 "where Name  = " + country + " ;");
     }
 
