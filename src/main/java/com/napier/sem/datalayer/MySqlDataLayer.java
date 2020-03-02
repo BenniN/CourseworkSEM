@@ -181,7 +181,7 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public SimplePopulationReport getThePopulationOfTheWorld() {
-        return produceSimplePopulationReport ("select sum(population) from country;");
+        return produceSimplePopulationReport ("select sum(population) as population from country;");
     }
 
     @Override
