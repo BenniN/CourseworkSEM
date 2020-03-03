@@ -8,3 +8,6 @@ This is the Coursework for Software Engineering Methods Group 15
 - License [![LICENSE](https://img.shields.io/github/license/BenniN/CourseworkSEM.svg?style=flat-square)](https://github.com/BenniN/CourseworkSEM/blob/master/LICENSE)
 
 - Release: [![Releases](https://img.shields.io/github/release/BenniN/CourseworkSEM/all.svg?style=flat-square)](https://github.com/BenniN/CourseworkSEM/releases)
+
+- Code Coverage: [![codecov](https://codecov.io/gh/BenniN/CourseworkSEM/branch/master/graph/badge.svg)](https://codecov.io/gh/BenniN/CourseworkSEM)
+
