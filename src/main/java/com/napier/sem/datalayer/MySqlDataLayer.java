@@ -175,7 +175,10 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public List<PopulationReport> getPopulationOfPeopleInEachCountry() {
-        throw new UnsupportedOperationException("not yet implemented");
+        return producePopulationReport("SELECT co.name as name, SUM(c.Population)as population_cities, SUM(co.Population) as population_total\n" +
+                "FROM city c\n" +
+                "JOIN country co on c.CountryCode = co.Code\n" +
+                "GROUP BY co.Name", DataLayer.NO_LIMIT);
     }
 
     @Override
