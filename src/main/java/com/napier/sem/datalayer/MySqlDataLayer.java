@@ -155,14 +155,14 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public List<PopulationReport> getPopulationOfPeopleInEachContinent() {
-        throw new UnsupportedOperationException("SELECT cntry.Continent,\n" +
+        return producePopulationReport("SELECT cntry.Continent,\n" +
                 "       sum(cty.Population) as population_cities,\n" +
                 "       (SELECT sum(country.Population)\n" +
                 "        FROM country\n" +
                 "        WHERE country.Continent = cntry.Continent) as population_total\n" +
                 "FROM city cty\n" +
                 "         JOIN country cntry ON cty.CountryCode = cntry.Code\n" +
-                "GROUP BY cntry.Continent;");
+                "GROUP BY cntry.Continent;", DataLayer.NO_LIMIT);
     }
 
     @Override
