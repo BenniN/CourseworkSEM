@@ -1,5 +1,7 @@
 package com.napier.sem.reports;
 
+import com.napier.sem.utils.InputValidator;
+
 /**
  * This (immutable) class represents reports for capital cities.
  * In fact, it contains the name, country and population for a capital city.
@@ -17,6 +19,8 @@ public final class CapitalCityReport {
      * @param population the population of the capital city
      */
     public CapitalCityReport(String name, String country, Integer population) {
+        InputValidator.checkNotNull(name, country, population);
+        InputValidator.checkNotNegative(population);
         this.name = name;
         this.country = country;
         this.population = population;

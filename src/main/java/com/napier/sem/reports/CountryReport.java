@@ -1,5 +1,7 @@
 package com.napier.sem.reports;
 
+import com.napier.sem.utils.InputValidator;
+
 /**
  * A CountryReport is a collection of data regarding one specifc country.
  * This class is immutable.
@@ -23,6 +25,7 @@ public final class CountryReport {
      * @param capital the capital of this country
      */
     public CountryReport(String code, String name, String continent, String region, Integer population, String capital) {
+        InputValidator.checkNotNull(code, name, continent, region, population, capital);
         if (code.length() != 3) {
             throw new IllegalArgumentException("the countries code must consist out of 3 characters");
         }

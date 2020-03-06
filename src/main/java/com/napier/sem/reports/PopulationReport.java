@@ -1,5 +1,7 @@
 package com.napier.sem.reports;
 
+import com.napier.sem.utils.InputValidator;
+
 /**
  * The immutable class PopulationReport can be used for continents / regions / countries.
  * It contains data about the population in total, in cities and outside cities (including a percentage).
@@ -22,6 +24,13 @@ public final class PopulationReport {
      * @param populationCities the total population in cites of this continent / region / country
      */
     public PopulationReport(String name, Integer totalPopulation, Integer populationCities) {
+        InputValidator.checkNotNull(name, totalPopulation, populationCities);
+        InputValidator.checkNotNegative(totalPopulation);
+        InputValidator.checkNotNegative(populationCities);
+        if (totalPopulation < populationCities) {
+            throw new IllegalArgumentException("total population cannot be higher than the (total) population in cities");
+        }
+
         this.name = name;
         this.totalPopulation = totalPopulation;
         this.populationCities = populationCities;

@@ -1,5 +1,7 @@
 package com.napier.sem.reports;
 
+import com.napier.sem.utils.InputValidator;
+
 /**
  * A CityReport contains a cities data such as name, country, district and its population.
  * This class is immutable.
@@ -19,6 +21,8 @@ public final class CityReport {
      * @param population the population of the city
      */
     public CityReport(String name, String country, String district, Integer population) {
+        InputValidator.checkNotNull(name, country, district, population);
+        InputValidator.checkNotNegative(population);
         this.name = name;
         this.country = country;
         this.district = district;

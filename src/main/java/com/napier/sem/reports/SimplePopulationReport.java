@@ -1,5 +1,7 @@
 package com.napier.sem.reports;
 
+import com.napier.sem.utils.InputValidator;
+
 /**
  * This type of population report only consist of the name and population
  * of a certain area (e.g. world, region, continent, district or country).
@@ -15,6 +17,8 @@ public final class SimplePopulationReport {
      * @param population the total population for that area
      */
     public SimplePopulationReport(String name, int population) {
+        InputValidator.checkNotNull(name);
+        InputValidator.checkNotNegative(population);
         this.name = name;
         this.population = population;
     }

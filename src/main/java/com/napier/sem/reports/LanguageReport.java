@@ -1,5 +1,7 @@
 package com.napier.sem.reports;
 
+import com.napier.sem.utils.InputValidator;
+
 /**
  * A Language Report contains information on one language
  * such as the name of the language, the number of people speaking
@@ -18,6 +20,9 @@ public final class LanguageReport {
      * @param percentage the percentage of the world population
      */
     public LanguageReport(String language, int speakers, double percentage) {
+        InputValidator.checkNotNull(language, speakers, percentage);
+        InputValidator.checkNotNegative(speakers);
+        InputValidator.checkNotNegative(percentage);
         this.language = language;
         this.speakers = speakers;
         this.percentage = percentage;
