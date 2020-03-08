@@ -26,9 +26,9 @@ public class CountryReportTest {
     @Test
     public void testCountryReportCodeLength() {
         assertThrows(IllegalArgumentException.class,
-                () -> new CountryReport("ASDE", null, null, null, null, null));
+                () -> new CountryReport("ASDE", "null", "null", "null", 0, "null"));
         assertThrows(IllegalArgumentException.class,
-                () -> new CountryReport("DE", null, null, null, null, null));
+                () -> new CountryReport("DE", "null", "null", "null", 0, "null"));
     }
 
 }

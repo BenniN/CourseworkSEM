@@ -11,7 +11,7 @@ public class CityReportTest {
         assertEquals("Munich", report.getName());
         assertEquals("Germany", report.getCountry());
         assertEquals("Bavaria", report.getDistrict());
-        assertEquals(1400000, report.getPopulation());
+        assertEquals(14000000, report.getPopulation());
     }
 
     @Test

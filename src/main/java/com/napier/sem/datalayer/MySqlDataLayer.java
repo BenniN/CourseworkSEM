@@ -229,7 +229,7 @@ public class MySqlDataLayer implements DataLayer {
                 "ORDER BY total DESC;");
     }
 
-    private String buildLanguageSqlList(String[] languages) {
+    String buildLanguageSqlList(String[] languages) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < languages.length; i++) {
             if (i > 0) {
@@ -259,7 +259,7 @@ public class MySqlDataLayer implements DataLayer {
      * @param limit the max count of reports
      * @return a list of country reports based on the specified sql.
      */
-    private List<CountryReport> produceCountryReport(String sql, int limit) {
+    List<CountryReport> produceCountryReport(String sql, int limit) {
         return produceReport(sql, limit, resultSet -> {
             String code = resultSet.getString("code");
             String name = resultSet.getString("name");
@@ -285,7 +285,7 @@ public class MySqlDataLayer implements DataLayer {
      * @param limit the max rows for this report
      * @return a list containing the city reports
      */
-    private List<CityReport> produceCityReport(String sql, int limit) {
+    List<CityReport> produceCityReport(String sql, int limit) {
         return produceReport(sql, limit, resultSet -> {
             String name = resultSet.getString("name");
             int population = resultSet.getInt("population");
@@ -308,7 +308,7 @@ public class MySqlDataLayer implements DataLayer {
      * @param limit the max count of generated reports
      * @return a list containing the reports
      */
-    private List<CapitalCityReport> produceCapitalCityReport(String sql, int limit) {
+    List<CapitalCityReport> produceCapitalCityReport(String sql, int limit) {
         return produceReport(sql, limit, resultSet -> {
             String name = resultSet.getString("name");
             String country = resultSet.getString("country");
@@ -330,7 +330,7 @@ public class MySqlDataLayer implements DataLayer {
      * @param limit the max count of generated reports
      * @return a list containing the reports
      */
-    private List<PopulationReport> producePopulationReport(String sql, int limit) {
+    List<PopulationReport> producePopulationReport(String sql, int limit) {
         return produceReport(sql, limit, resultSet -> {
             String name = resultSet.getString("name");
             int populationTotal = resultSet.getInt("population_total");
@@ -346,7 +346,7 @@ public class MySqlDataLayer implements DataLayer {
      *            Use language, speakers and percentage as column names
      * @return a list containing the reports
      */
-    private List<LanguageReport> produceLanguageReport(String sql) {
+    List<LanguageReport> produceLanguageReport(String sql) {
         return produceReport(sql, DataLayer.NO_LIMIT, resultSet -> {
             String language = resultSet.getString("language");
             int speakers = resultSet.getInt("speakers");
@@ -364,7 +364,7 @@ public class MySqlDataLayer implements DataLayer {
      * @param sql the sql to execute
      * @return the first result of that sql as simple population report, or null if there are no results
      */
-    private SimplePopulationReport produceSimplePopulationReport(String sql) {
+    SimplePopulationReport produceSimplePopulationReport(String sql) {
         List<SimplePopulationReport> reports = produceReport(sql, 1, resultSet -> {
             String name = resultSet.getString("name");
             int population = resultSet.getInt("population");
@@ -424,7 +424,7 @@ public class MySqlDataLayer implements DataLayer {
      * @param sql the sql to execute
      * @return a result set object containing the results
      */
-    private ResultSet executeSQLAndReturnResultSet(String sql, int maxRows) {
+    ResultSet executeSQLAndReturnResultSet(String sql, int maxRows) {
         try {
             Statement statement = connection.createStatement();
             if (maxRows > 0) {

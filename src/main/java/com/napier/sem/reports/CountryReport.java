@@ -79,15 +79,4 @@ public final class CountryReport {
         return capital;
     }
 
-    @Override
-    public String toString() {
-        return "CountryReport{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", continent='" + continent + '\'' +
-                ", region='" + region + '\'' +
-                ", population=" + population +
-                ", capital='" + capital + '\'' +
-                '}';
-    }
 }
