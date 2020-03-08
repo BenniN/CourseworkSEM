@@ -21,7 +21,7 @@ public class SimpleConsoleUI {
     public void start() {
         LOGGER.debug("starting console application");
         printAsciiArt();
-        execute(() -> System.out.println(appServices.getAllCountriesOrderedByLargestPopulationToSmallest()));
+        execute((appServices) -> System.out.println(appServices.getAllCountriesOrderedByLargestPopulationToSmallest()));
     }
 
     private void printAsciiArt() {
@@ -30,15 +30,12 @@ public class SimpleConsoleUI {
 
     private void execute(ServiceCall call) {
         try {
-            call.perform();
-        } catch (Exception e) {
+            call.perform(appServices);
+        } catch (RuntimeException e) {
             e.printStackTrace();
         }
     }
 
-    private interface ServiceCall {
 
-        void perform() throws Exception;
 
-    }
 }
