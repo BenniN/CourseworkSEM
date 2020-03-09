@@ -30,26 +30,33 @@ public class DefaultAppServices implements AppServices {
 
     @Override
     public List<CountryReport> getAllCountriesInAContinentOrderedByLargestPopulationToSmallest(String continent) {
+        this.continentValidator.validate(continent);
         return dataLayer.getCountriesInAContinentOrganisedByLargestPopulationToSmallest(continent, DataLayer.NO_LIMIT);
     }
 
     @Override
     public List<CountryReport> getAllCountriesInARegionOrderedByLargestPopulationToSmallest(String region) {
+        this.regionValidator.validate(region);
         return dataLayer.getCountriesInARegionOrganisedByLargestPopulationToSmallest(region, DataLayer.NO_LIMIT);
     }
 
     @Override
     public List<CountryReport> getCountriesFromWorldOrderedByLargestPopulationToSmallest(int limit) {
+        this.limitValidator.validate(limit);
         return dataLayer.getCountriesInTheWorldOrganisedByLargestPopulationToSmallest(limit);
     }
 
     @Override
     public List<CountryReport> getCountriesFromContinentOrderedByLargestPopulationToSmallest(String continent, int limit) {
+        this.continentValidator.validate(continent);
+        this.limitValidator.validate(limit);
         return dataLayer.getCountriesInAContinentOrganisedByLargestPopulationToSmallest(continent, limit);
     }
 
     @Override
     public List<CountryReport> getCountriesFromRegionOrderedByLargestPopulationToSmallest(String region, int limit) {
+        this.limitValidator.validate(limit);
+        this.regionValidator.validate(region);
         return dataLayer.getCountriesInARegionOrganisedByLargestPopulationToSmallest(region, limit);
     }
 

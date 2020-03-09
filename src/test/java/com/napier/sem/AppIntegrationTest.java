@@ -44,4 +44,14 @@ public class AppIntegrationTest {
         appServices.getCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest(3);
     }
 
+    @Test
+    public void testCountryReports(){
+        appServices.getAllCountriesOrderedByLargestPopulationToSmallest();
+        appServices.getAllCountriesInAContinentOrderedByLargestPopulationToSmallest("Asia");
+        appServices.getAllCountriesInARegionOrderedByLargestPopulationToSmallest("North America");
+        appServices.getCountriesFromWorldOrderedByLargestPopulationToSmallest(10);
+        appServices.getCountriesFromContinentOrderedByLargestPopulationToSmallest("Asia",5);
+        appServices.getCountriesFromRegionOrderedByLargestPopulationToSmallest("North America", 5);
+    }
+
 }

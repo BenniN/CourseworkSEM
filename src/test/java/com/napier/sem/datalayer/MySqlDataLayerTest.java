@@ -22,6 +22,33 @@ public class MySqlDataLayerTest {
     }
 
     @Test
+    public void testGetCountriesInTheWorldOrganisedByLargestPopulationToSmallest(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getCountriesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCountryReport(Mockito.any(), Mockito.anyInt());
+    }
+
+    @Test
+    public void testGetCountriesInAContinentOrganisedByLargestPopulationToSmallest(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getCountriesInAContinentOrganisedByLargestPopulationToSmallest("Europe", DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCountryReport(Mockito.any(), Mockito.anyInt());
+    }
+
+    @Test
+    public void testGetCountriesInARegionOrganisedByLargestPopulationToSmallest(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getCountriesInARegionOrganisedByLargestPopulationToSmallest("British Islands",DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCountryReport(Mockito.any(), Mockito.anyInt());
+    }
+
+    @Test
     public void testGetCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest() {
         ResultSet resultSet = Mockito.mock(ResultSet.class);
         Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());

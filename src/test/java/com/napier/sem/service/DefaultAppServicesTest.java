@@ -3,6 +3,7 @@ package com.napier.sem.service;
 import com.napier.sem.datalayer.DataLayer;
 import com.napier.sem.exceptions.ServiceException;
 import com.napier.sem.reports.CapitalCityReport;
+import com.napier.sem.reports.CountryReport;
 import com.napier.sem.service.validator.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,55 @@ public class DefaultAppServicesTest {
         Mockito.when(dataLayer.getCountriesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT)).thenReturn(Collections.emptyList());
         appServices.getAllCountriesOrderedByLargestPopulationToSmallest();
         Mockito.verify(dataLayer).getCountriesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT);
+    }
+
+    @Test
+    public void testAllCountriesInAContinentOrderedByLargestPopulationToSmallest(){
+        List<CountryReport> reports = getSampleCountryReports();
+        Mockito.when(dataLayer.getCountriesInAContinentOrganisedByLargestPopulationToSmallest("Europe",DataLayer.NO_LIMIT)).thenReturn(reports);
+        List<CountryReport> results =appServices.getAllCountriesInAContinentOrderedByLargestPopulationToSmallest("Europe");
+        assertEquals(reports.size(),results.size());
+        assertEquals(reports.get(0),results.get(0));
+        Mockito.verify(dataLayer).getCountriesInAContinentOrganisedByLargestPopulationToSmallest("Europe",DataLayer.NO_LIMIT);
+        Mockito.verify(continentValidator).validate("Europe");
+    }
+
+    @Test
+    public void testAllCountriesInARegionOrderedByLargestPopulationToSmallest(){
+        List<CountryReport> reports = getSampleCountryReports();
+        Mockito.when(dataLayer.getCountriesInARegionOrganisedByLargestPopulationToSmallest("British Islands", DataLayer.NO_LIMIT)).thenReturn(reports);
+        assertEquals(reports, appServices.getAllCountriesInARegionOrderedByLargestPopulationToSmallest("British Islands"));
+        Mockito.verify(dataLayer).getCountriesInARegionOrganisedByLargestPopulationToSmallest("British Islands", DataLayer.NO_LIMIT);
+        Mockito.verify(regionValidator).validate("British Islands");
+    }
+
+    @Test
+    public void testCountriesFromWorldOrderedByLargestPopulationToSmallest(){
+        List<CountryReport> reports = getSampleCountryReports();
+        Mockito.when(dataLayer.getCountriesInTheWorldOrganisedByLargestPopulationToSmallest(1)).thenReturn(reports);
+        assertEquals(reports, appServices.getCountriesFromWorldOrderedByLargestPopulationToSmallest(1));
+        Mockito.verify(dataLayer).getCountriesInTheWorldOrganisedByLargestPopulationToSmallest(1);
+        Mockito.verify(limitValidator).validate(1);
+    }
+
+    @Test
+    public void testCountriesFromContinentOrderedByLargestPopulationToSmallest(){
+        List<CountryReport> reports = getSampleCountryReports();
+        Mockito.when(dataLayer.getCountriesInAContinentOrganisedByLargestPopulationToSmallest("Europe", 1)).thenReturn(reports);
+        assertEquals(reports, appServices.getCountriesFromContinentOrderedByLargestPopulationToSmallest("Europe", 1));
+        Mockito.verify(dataLayer).getCountriesInAContinentOrganisedByLargestPopulationToSmallest("Europe", 1);
+        Mockito.verify(continentValidator).validate("Europe");
+        Mockito.verify(limitValidator).validate(1);
+    }
+
+    @Test
+    public void testCountriesFromRegionOrderedByLargestPopulationToSmallest(){
+        List<CountryReport> reports = getSampleCountryReports();
+        Mockito.when(dataLayer.getCountriesInARegionOrganisedByLargestPopulationToSmallest("British Islands", 1)).thenReturn(reports);
+        assertEquals(reports, appServices.getCountriesFromRegionOrderedByLargestPopulationToSmallest("British Islands", 1));
+        Mockito.verify(dataLayer).getCountriesInARegionOrganisedByLargestPopulationToSmallest("British Islands", 1);
+        Mockito.verify(regionValidator).validate("British Islands");
+        Mockito.verify(limitValidator).validate(1);
     }
 
     @Test
@@ -141,5 +191,9 @@ public class DefaultAppServicesTest {
 
     private List<CapitalCityReport> getSampleCapitalCityReports() {
         return List.of(new CapitalCityReport("Berlin", "Germany", 12345));
+    }
+
+   private List<CountryReport> getSampleCountryReports(){
+        return List.of(new CountryReport("ABC","Germany","Europe","SomeRegion",1234567,"TestCapital"));
     }
 }
