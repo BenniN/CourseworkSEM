@@ -23,7 +23,7 @@ public class Utils {
                 }
             }
             return resultStringBuilder.toString().trim();
-        } catch (IOException e) {
+        } catch (Exception e) {
             return null;
         }
     }
