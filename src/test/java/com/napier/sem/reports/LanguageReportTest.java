@@ -26,6 +26,7 @@ public class LanguageReportTest {
         assertThrows(IllegalArgumentException.class, () ->
                 new LanguageReport ("German", -500, 4.3));
     }
+    // test
     @Test
     public void testLanguageReportNegativePercentage() {
         assertThrows(IllegalArgumentException.class, () ->
