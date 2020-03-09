@@ -21,5 +21,15 @@ public class LanguageReportTest {
         assertThrows(IllegalArgumentException.class,
                 () -> new LanguageReport("German", 12345, -2.3));
     }
+    @Test
+    public void testLanguageReportNegativeSpeakers() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new LanguageReport ("German", -500, 4.3));
+    }
+    @Test
+    public void testLanguageReportNegativePercentage() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new LanguageReport ("German", 123456, -4.3));
+    }
 
 }
