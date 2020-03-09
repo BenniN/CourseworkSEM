@@ -1,7 +1,7 @@
 package com.napier.sem.datalayer;
 
 import com.napier.sem.reports.*;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -9,15 +9,43 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MySqlDataLayerTest {
 
-    private static MySqlDataLayer dataLayer;
+    private MySqlDataLayer dataLayer;
 
-    @BeforeAll
-    public static void init() {
+
+    @BeforeEach
+    public void setUp() {
         dataLayer = Mockito.spy(new MySqlDataLayer("host", "user", "password"));
+    }
+
+    @Test
+    public void testGetCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest() {
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCapitalCityReport(Mockito.any(), Mockito.anyInt());
+    }
+
+    @Test
+    public void testGetCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest() {
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest("Europe", DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCapitalCityReport(Mockito.any(), Mockito.anyInt());
+    }
+
+    @Test
+    public void testGetCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest() {
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest("British Islands", DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCapitalCityReport(Mockito.any(), Mockito.anyInt());
     }
 
     @Test

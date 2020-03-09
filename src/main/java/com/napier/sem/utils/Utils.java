@@ -22,7 +22,7 @@ public class Utils {
                     resultStringBuilder.append(line).append("\n");
                 }
             }
-            return resultStringBuilder.toString();
+            return resultStringBuilder.toString().trim();
         } catch (IOException e) {
             return null;
         }

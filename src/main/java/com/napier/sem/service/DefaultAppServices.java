@@ -2,6 +2,7 @@ package com.napier.sem.service;
 
 import com.napier.sem.datalayer.DataLayer;
 import com.napier.sem.reports.*;
+import com.napier.sem.service.validator.*;
 
 import java.util.List;
 
@@ -13,6 +14,10 @@ import java.util.List;
 public class DefaultAppServices implements AppServices {
 
     private final DataLayer dataLayer;
+
+    Validator<String> continentValidator = new ContinentValidator();
+    Validator<String> regionValidator = new RegionValidator();
+    Validator<Integer> limitValidator = new LimitValidator();
 
     public DefaultAppServices(DataLayer dataLayer) {
         this.dataLayer = dataLayer;
@@ -105,26 +110,33 @@ public class DefaultAppServices implements AppServices {
 
     @Override
     public List<CapitalCityReport> getAllCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest(String continent) {
+        this.continentValidator.validate(continent);
         return dataLayer.getCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest(continent, DataLayer.NO_LIMIT);
     }
 
     @Override
     public List<CapitalCityReport> getAllCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest(String region) {
+        this.regionValidator.validate(region);
         return dataLayer.getCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest(region, DataLayer.NO_LIMIT);
     }
 
     @Override
     public List<CapitalCityReport> getCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest(int limit) {
+        this.limitValidator.validate(limit);
         return dataLayer.getCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest(limit);
     }
 
     @Override
     public List<CapitalCityReport> getCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest(String continent, int limit) {
+        this.continentValidator.validate(continent);
+        this.limitValidator.validate(limit);
         return dataLayer.getCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest(continent, limit);
     }
 
     @Override
     public List<CapitalCityReport> getCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest(String region, int limit) {
+        this.regionValidator.validate(region);
+        this.limitValidator.validate(limit);
         return dataLayer.getCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest(region, limit);
     }
 
@@ -177,4 +189,5 @@ public class DefaultAppServices implements AppServices {
     public List<LanguageReport> getLanguageReport(String[] languages) {
         return dataLayer.getLanguageReport(languages);
     }
+
 }

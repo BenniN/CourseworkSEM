@@ -6,7 +6,8 @@ import com.napier.sem.service.AppServices;
 import com.napier.sem.service.DefaultAppServices;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AppIntegrationTest {
 
@@ -31,6 +32,16 @@ public class AppIntegrationTest {
     @Test
     public void testAllCountriesOrderedByLargestPopulationToSmallest() {
         appServices.getAllCountriesOrderedByLargestPopulationToSmallest();
+    }
+
+    @Test
+    public void testCapitalCityReports() {
+        appServices.getAllCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest();
+        appServices.getAllCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest("Europe");
+        appServices.getAllCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest("North America");
+        appServices.getCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest("Europe", 5);
+        appServices.getCapitalCitiesInARegionOrganisedByLargestPopulationToSmallest("North America", 4);
+        appServices.getCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest(3);
     }
 
 }
