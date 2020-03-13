@@ -23,6 +23,8 @@ public class DefaultAppServicesTest {
     private Validator<String> continentValidator;
     private Validator<String> regionValidator;
     private Validator<Integer> limitValidator;
+    private Validator<String> countryValidator;
+    private Validator<String> districtValidator;
 
     @BeforeEach
     public void init() {
@@ -32,11 +34,16 @@ public class DefaultAppServicesTest {
         appServices.continentValidator = Mockito.spy(appServices.continentValidator);
         appServices.regionValidator = Mockito.spy(appServices.regionValidator);
         appServices.limitValidator = Mockito.spy(appServices.limitValidator);
+        appServices.countryValidator = Mockito.spy(appServices.countryValidator);
+        appServices.districtValidator = Mockito.spy(appServices.districtValidator);
 
         // spy validators
         this.continentValidator = appServices.continentValidator;
         this.regionValidator = appServices.regionValidator;
         this.limitValidator = appServices.limitValidator;
+        this.countryValidator = appServices.countryValidator;
+        this.districtValidator = appServices.districtValidator;
+
     }
 
     @Test
@@ -188,6 +195,7 @@ public class DefaultAppServicesTest {
         assertEquals(reports,appServices.getCitiesInACountryOrganisedByLargestPopulationToSmallest("United Kingdom",1));
         Mockito.verify(dataLayer).getCitiesInACountryOrganisedByLargestPopulationToSmallest("United Kingdom",1);
         Mockito.verify(limitValidator).validate(1);
+        Mockito.verify(countryValidator).validate("United Kingdom");
     }
 
     @Test
@@ -197,6 +205,7 @@ public class DefaultAppServicesTest {
         assertEquals(reports,appServices.getCitiesInADistrictOrganisedByLargestPopulationToSmallest("Scotland",1));
         Mockito.verify(dataLayer).getCitiesInADistrictOrganisedByLargestPopulationToSmallest("Scotland",1);
         Mockito.verify(limitValidator).validate(1);
+        Mockito.verify(districtValidator).validate("Scotland");
     }
 
 

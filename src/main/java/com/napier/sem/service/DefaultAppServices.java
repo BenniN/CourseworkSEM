@@ -18,6 +18,8 @@ public class DefaultAppServices implements AppServices {
     Validator<String> continentValidator = new ContinentValidator();
     Validator<String> regionValidator = new RegionValidator();
     Validator<Integer> limitValidator = new LimitValidator();
+    Validator<String> countryValidator = new CountryValidator();
+    Validator<String> districtValidator = new DistrictValidator();
 
     public DefaultAppServices(DataLayer dataLayer) {
         this.dataLayer = dataLayer;
@@ -108,12 +110,14 @@ public class DefaultAppServices implements AppServices {
     @Override
     public List<CityReport> getCitiesInACountryOrganisedByLargestPopulationToSmallest(String country, int limit) {
         limitValidator.validate(limit);
+        countryValidator.validate(country);
         return dataLayer.getCitiesInACountryOrganisedByLargestPopulationToSmallest(country, limit);
     }
 
     @Override
     public List<CityReport> getCitiesInADistrictOrganisedByLargestPopulationToSmallest(String district, int limit) {
         limitValidator.validate(limit);
+        districtValidator.validate(district);
         return dataLayer.getCitiesInADistrictOrganisedByLargestPopulationToSmallest(district, limit);
     }
 
