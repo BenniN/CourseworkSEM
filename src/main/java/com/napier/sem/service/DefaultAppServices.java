@@ -87,26 +87,33 @@ public class DefaultAppServices implements AppServices {
 
     @Override
     public List<CityReport> getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(int limit) {
+        limitValidator.validate(limit);
         return dataLayer.getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(limit);
     }
 
     @Override
     public List<CityReport> getCitiesInAContinentOrganisedByLargestPopulationToSmallest(String continent, int limit) {
+        limitValidator.validate(limit);
+        continentValidator.validate(continent);
         return dataLayer.getCitiesInAContinentOrganisedByLargestPopulationToSmallest(continent, limit);
     }
 
     @Override
     public List<CityReport> getCitiesInARegionOrganisedByLargestPopulationToSmallest(String region, int limit) {
+        limitValidator.validate(limit);
+        regionValidator.validate(region);
         return dataLayer.getCitiesInARegionOrganisedByLargestPopulationToSmallest(region, limit);
     }
 
     @Override
     public List<CityReport> getCitiesInACountryOrganisedByLargestPopulationToSmallest(String country, int limit) {
+        limitValidator.validate(limit);
         return dataLayer.getCitiesInACountryOrganisedByLargestPopulationToSmallest(country, limit);
     }
 
     @Override
     public List<CityReport> getCitiesInADistrictOrganisedByLargestPopulationToSmallest(String district, int limit) {
+        limitValidator.validate(limit);
         return dataLayer.getCitiesInADistrictOrganisedByLargestPopulationToSmallest(district, limit);
     }
 
