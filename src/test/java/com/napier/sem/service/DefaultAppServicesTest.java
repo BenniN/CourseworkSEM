@@ -3,6 +3,7 @@ package com.napier.sem.service;
 import com.napier.sem.datalayer.DataLayer;
 import com.napier.sem.exceptions.ServiceException;
 import com.napier.sem.reports.CapitalCityReport;
+import com.napier.sem.reports.CityReport;
 import com.napier.sem.reports.CountryReport;
 import com.napier.sem.service.validator.Validator;
 import org.junit.jupiter.api.BeforeEach;
@@ -152,6 +153,55 @@ public class DefaultAppServicesTest {
     }
 
     @Test
+    public void testGetCitiesInTheWorldOrganisedByLargestPopulationToSmallest(){
+        List<CityReport> reports = getSampleCityReports();
+        Mockito.when(dataLayer.getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT)).thenReturn(reports);
+        assertEquals(reports,appServices.getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT));
+        Mockito.verify(dataLayer).getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT);
+        Mockito.verify(limitValidator).validate(DataLayer.NO_LIMIT);
+    }
+
+    @Test
+    public void testGetCitiesInARegionOrganisedByLargestPopulationToSmallest(){
+        List<CityReport> reports = getSampleCityReports();
+        Mockito.when(dataLayer.getCitiesInARegionOrganisedByLargestPopulationToSmallest("British Islands",1)).thenReturn(reports);
+        assertEquals(reports,appServices.getCitiesInARegionOrganisedByLargestPopulationToSmallest("British Islands",1));
+        Mockito.verify(dataLayer).getCitiesInARegionOrganisedByLargestPopulationToSmallest("British Islands",1);
+        Mockito.verify(regionValidator).validate("British Islands");
+        Mockito.verify(limitValidator).validate(1);
+    }
+
+    @Test
+    public void testGetCitiesInAContinentOrganisedByLargestPopulationToSmallest(){
+        List<CityReport> reports = getSampleCityReports();
+        Mockito.when(dataLayer.getCitiesInAContinentOrganisedByLargestPopulationToSmallest("Asia",1)).thenReturn(reports);
+        assertEquals(reports,appServices.getCitiesInAContinentOrganisedByLargestPopulationToSmallest("Asia",1));
+        Mockito.verify(dataLayer).getCitiesInAContinentOrganisedByLargestPopulationToSmallest("Asia",1);
+        Mockito.verify(continentValidator).validate("Asia");
+        Mockito.verify(limitValidator).validate(1);
+    }
+
+    @Test
+    public void testGetCitiesInACountryOrganisedByLargestPopulationToSmallest(){
+        List<CityReport> reports = getSampleCityReports();
+        Mockito.when(dataLayer.getCitiesInACountryOrganisedByLargestPopulationToSmallest("United Kingdom",1)).thenReturn(reports);
+        assertEquals(reports,appServices.getCitiesInACountryOrganisedByLargestPopulationToSmallest("United Kingdom",1));
+        Mockito.verify(dataLayer).getCitiesInACountryOrganisedByLargestPopulationToSmallest("United Kingdom",1);
+        Mockito.verify(limitValidator).validate(1);
+    }
+
+    @Test
+    public void testGetCitiesInADistrictOrganisedByLargestPopulationToSmallest(){
+        List<CityReport> reports = getSampleCityReports();
+        Mockito.when(dataLayer.getCitiesInADistrictOrganisedByLargestPopulationToSmallest("Scotland",1)).thenReturn(reports);
+        assertEquals(reports,appServices.getCitiesInADistrictOrganisedByLargestPopulationToSmallest("Scotland",1));
+        Mockito.verify(dataLayer).getCitiesInADistrictOrganisedByLargestPopulationToSmallest("Scotland",1);
+        Mockito.verify(limitValidator).validate(1);
+    }
+
+
+
+    @Test
     public void testContinentValidator() {
         continentValidator.validate("Europe");
         continentValidator.validate("Asia");
@@ -195,5 +245,9 @@ public class DefaultAppServicesTest {
 
    private List<CountryReport> getSampleCountryReports(){
         return List.of(new CountryReport("ABC","Germany","Europe","SomeRegion",1234567,"TestCapital"));
+    }
+
+    private  List<CityReport> getSampleCityReports(){
+        return List.of(new CityReport("Belfast","Northern Ireland","North Ireland",287500));
     }
 }

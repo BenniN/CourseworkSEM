@@ -20,4 +20,14 @@ public class CityReportTest {
         assertThrows(IllegalArgumentException.class, () -> new CityReport("Munich", "Germany", "Bavaria", -1));
     }
 
+    @Test
+    public void testCityThrowExceptionForNullInput(){
+        assertThrows(IllegalArgumentException.class, () -> new CityReport("Edinburgh",null,null,null));
+        assertThrows(IllegalArgumentException.class,()-> new CityReport(null,"Scotland",null,null));
+        assertThrows(IllegalArgumentException.class,()-> new CityReport(null,null,"Scotland",null));
+        assertThrows(IllegalArgumentException.class,()-> new CityReport(null,null,null,450180));
+    }
+
+
+
 }

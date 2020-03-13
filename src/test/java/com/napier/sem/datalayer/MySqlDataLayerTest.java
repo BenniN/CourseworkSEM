@@ -75,6 +75,55 @@ public class MySqlDataLayerTest {
         Mockito.verify(dataLayer).produceCapitalCityReport(Mockito.any(), Mockito.anyInt());
     }
 
+
+    @Test
+    public void testGetCitiesInTheWorldOrganisedByLargestPopulationToSmallest(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(),Mockito.anyInt());
+        dataLayer.getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(),Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCityReport(Mockito.any(),Mockito.anyInt());
+    }
+    @Test
+    public void testGetCitiesInARegionOrganisedByLargestPopulationToSmallest(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getCitiesInARegionOrganisedByLargestPopulationToSmallest("British Islands", DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCityReport(Mockito.any(), Mockito.anyInt());
+
+    }
+
+    @Test
+    public void testGetCitiesInAContinentOrganisedByLargestPopulationToSmallest(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getCitiesInAContinentOrganisedByLargestPopulationToSmallest("Asia", DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCityReport(Mockito.any(), Mockito.anyInt());
+
+    }
+
+    @Test
+    public void testGetCitiesInACountryOrganisedByLargestPopulationToSmallest(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getCitiesInACountryOrganisedByLargestPopulationToSmallest("United Kingdom", DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCityReport(Mockito.any(), Mockito.anyInt());
+
+    }
+
+    @Test
+    public void testGetCitiesInADistrictOrganisedByLargestPopulationToSmallest(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getCitiesInADistrictOrganisedByLargestPopulationToSmallest("Scotland", DataLayer.NO_LIMIT);
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceCityReport(Mockito.any(), Mockito.anyInt());
+
+    }
+
     @Test
     public void testProduceSimplePopulationReport() throws SQLException {
         ResultSet result = Mockito.mock(ResultSet.class);
