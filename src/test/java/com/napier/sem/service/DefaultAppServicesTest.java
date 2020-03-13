@@ -155,10 +155,10 @@ public class DefaultAppServicesTest {
     @Test
     public void testGetCitiesInTheWorldOrganisedByLargestPopulationToSmallest(){
         List<CityReport> reports = getSampleCityReports();
-        Mockito.when(dataLayer.getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT)).thenReturn(reports);
-        assertEquals(reports,appServices.getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT));
-        Mockito.verify(dataLayer).getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(DataLayer.NO_LIMIT);
-        Mockito.verify(limitValidator).validate(DataLayer.NO_LIMIT);
+        Mockito.when(dataLayer.getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(1)).thenReturn(reports);
+        assertEquals(reports,appServices.getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(1));
+        Mockito.verify(dataLayer).getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(1);
+        Mockito.verify(limitValidator).validate(1);
     }
 
     @Test
