@@ -6,7 +6,7 @@
 
     <groupId>com.napier.sem</groupId>
     <artifactId>coursework</artifactId>
-    <version>0.3.0.1</version>
+    <version>0.7.0.1</version>
 
     <dependencies>
         <dependency>
