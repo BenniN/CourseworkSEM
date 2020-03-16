@@ -7,6 +7,8 @@ import com.napier.sem.service.DefaultAppServices;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AppIntegrationTest {
@@ -52,6 +54,29 @@ public class AppIntegrationTest {
         appServices.getCountriesFromWorldOrderedByLargestPopulationToSmallest(10);
         appServices.getCountriesFromContinentOrderedByLargestPopulationToSmallest("Asia",5);
         appServices.getCountriesFromRegionOrderedByLargestPopulationToSmallest("North America", 5);
+    }
+
+    @Test
+    public void testPopulationReports(){
+        appServices.getPopulationOfPeopleInEachContinent();
+        appServices.getPopulationOfPeopleInEachRegion();
+        appServices.getPopulationOfPeopleInEachCountry();
+    }
+    @Test
+    public void testSimplePopulationReports(){
+        appServices.getThePopulationOfTheWorld();
+        appServices.getThePopulationOfAContinent("Asia");
+        appServices.getThePopulationOfARegion("North America");
+        appServices.getThePopulationOfACountry("Germany");
+        appServices.getThePopulationOfADistrict("Kabol");
+        appServices.getThePopulationOfACity("Edinburgh");
+
+    }
+
+    @Test
+    public void testLanguageReport(){
+
+        appServices.getLanguageReport(new String[]{ "German", "English" });
     }
 
 }
