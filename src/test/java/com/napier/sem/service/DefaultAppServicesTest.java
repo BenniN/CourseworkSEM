@@ -23,25 +23,27 @@ public class DefaultAppServicesTest {
     private Validator<Integer> limitValidator;
     private Validator<String> countryValidator;
     private Validator<String> districtValidator;
+    private Validator<String> cityValidator;
 
     @BeforeEach
     public void init() {
         this.dataLayer = Mockito.mock(DataLayer.class);
         this.appServices = new DefaultAppServices(dataLayer);
 
+        // spy validators
         appServices.continentValidator = Mockito.spy(appServices.continentValidator);
         appServices.regionValidator = Mockito.spy(appServices.regionValidator);
         appServices.limitValidator = Mockito.spy(appServices.limitValidator);
         appServices.countryValidator = Mockito.spy(appServices.countryValidator);
         appServices.districtValidator = Mockito.spy(appServices.districtValidator);
+        appServices.cityValidator = Mockito.spy(appServices.cityValidator);
 
-        // spy validators
         this.continentValidator = appServices.continentValidator;
         this.regionValidator = appServices.regionValidator;
         this.limitValidator = appServices.limitValidator;
         this.countryValidator = appServices.countryValidator;
         this.districtValidator = appServices.districtValidator;
-
+        this.cityValidator = appServices.cityValidator;
     }
 
     @Test
@@ -208,43 +210,43 @@ public class DefaultAppServicesTest {
 
     @Test
     public void testGetThePopulationOfTheWorld(){
-        List<SimplePopulationReport> reports = getSampleSimplePopulationReports();
-        Mockito.when(dataLayer.getThePopulationOfTheWorld());
-        assertEquals(reports,appServices.getThePopulationOfTheWorld());
+        Long worldPopulation = 1234L;
+        Mockito.when(dataLayer.getThePopulationOfTheWorld()).thenReturn(worldPopulation);
+        assertEquals(worldPopulation, appServices.getThePopulationOfTheWorld());
         Mockito.verify(dataLayer).getThePopulationOfTheWorld();
-        Mockito.verify(districtValidator).validate("Scotland");
     }
+
     @Test
     public void testGetThePopulationOfAContinent(){
-        List<SimplePopulationReport> reports = getSampleSimplePopulationReports();
-        Mockito.when(dataLayer.getThePopulationOfAContinent("Asia"));
-        assertEquals(reports,appServices.getThePopulationOfAContinent("Asia"));
+        SimplePopulationReport report = getSampleSimplePopulationReport();
+        Mockito.when(dataLayer.getThePopulationOfAContinent("Asia")).thenReturn(report);
+        assertEquals(report,appServices.getThePopulationOfAContinent("Asia"));
         Mockito.verify(dataLayer).getThePopulationOfAContinent("Asia");
         Mockito.verify(continentValidator).validate("Asia");
     }
     @Test
     public void testGetThePopulationOfARegion(){
-        List<SimplePopulationReport> reports = getSampleSimplePopulationReports();
-        Mockito.when(dataLayer.getThePopulationOfARegion("North America"));
-        assertEquals(reports,appServices.getThePopulationOfARegion("North America"));
+        SimplePopulationReport report = getSampleSimplePopulationReport();
+        Mockito.when(dataLayer.getThePopulationOfARegion("North America")).thenReturn(report);
+        assertEquals(report,appServices.getThePopulationOfARegion("North America"));
         Mockito.verify(dataLayer).getThePopulationOfARegion("North America");
         Mockito.verify(regionValidator).validate("North America");
     }
 
     @Test
     public void testGetThePopulationOfACountry(){
-        List<SimplePopulationReport> reports = getSampleSimplePopulationReports();
-        Mockito.when(dataLayer.getThePopulationOfACountry("Germany"));
-        assertEquals(reports,appServices.getThePopulationOfACountry("Germany"));
+        SimplePopulationReport report = getSampleSimplePopulationReport();
+        Mockito.when(dataLayer.getThePopulationOfACountry("Germany")).thenReturn(report);
+        assertEquals(report,appServices.getThePopulationOfACountry("Germany"));
         Mockito.verify(dataLayer).getThePopulationOfACountry("Germany");
         Mockito.verify(countryValidator).validate("Germany");
     }
 
     @Test
     public void testGetThePopulationOfADistrict(){
-        List<SimplePopulationReport> reports = getSampleSimplePopulationReports();
-        Mockito.when(dataLayer.getThePopulationOfADistrict("Kabul"));
-        assertEquals(reports,appServices.getThePopulationOfADistrict("Kabul"));
+        SimplePopulationReport report = getSampleSimplePopulationReport();
+        Mockito.when(dataLayer.getThePopulationOfADistrict("Kabul")).thenReturn(report);
+        assertEquals(report,appServices.getThePopulationOfADistrict("Kabul"));
         Mockito.verify(dataLayer).getThePopulationOfADistrict("Kabul");
         Mockito.verify(districtValidator).validate("Kabul");
     }
@@ -252,53 +254,47 @@ public class DefaultAppServicesTest {
 
     @Test
     public void testGetThePopulationOfACity(){
-        List<SimplePopulationReport> reports = getSampleSimplePopulationReports();
-        Mockito.when(dataLayer.getThePopulationOfACity("Edinburgh"));
-        assertEquals(reports,appServices.getThePopulationOfACity("Edinburgh"));
+        SimplePopulationReport report = getSampleSimplePopulationReport();
+        Mockito.when(dataLayer.getThePopulationOfACity("Edinburgh")).thenReturn(report);
+        assertEquals(report,appServices.getThePopulationOfACity("Edinburgh"));
         Mockito.verify(dataLayer).getThePopulationOfACity("Edinburgh");
-        // couldn't find cityValidator //
+        Mockito.verify(cityValidator).validate("Edinburgh");
     }
 
     @Test
     public void testGetPopulationOfPeopleInEachCountry(){
         List<PopulationReport> reports = getSamplePopulationReports();
-        Mockito.when(dataLayer.getPopulationOfPeopleInEachCountry());
+        Mockito.when(dataLayer.getPopulationOfPeopleInEachCountry()).thenReturn(reports);
         assertEquals(reports,appServices.getPopulationOfPeopleInEachCountry());
         Mockito.verify(dataLayer).getPopulationOfPeopleInEachCountry();
-        Mockito.verify(countryValidator).validate("Germany");
     }
 
     @Test
     public void testGetPopulationOfPeopleInEachRegion(){
         List<PopulationReport> reports = getSamplePopulationReports();
-        Mockito.when(dataLayer.getPopulationOfPeopleInEachRegion());
+        Mockito.when(dataLayer.getPopulationOfPeopleInEachRegion()).thenReturn(reports);
         assertEquals(reports,appServices.getPopulationOfPeopleInEachRegion());
         Mockito.verify(dataLayer).getPopulationOfPeopleInEachRegion();
-        Mockito.verify(regionValidator).validate("North America");
     }
 
     @Test
     public void testGetPopulationOfPeopleInEachContinent(){
         List<PopulationReport> reports = getSamplePopulationReports();
-        Mockito.when(dataLayer.getPopulationOfPeopleInEachContinent());
+        Mockito.when(dataLayer.getPopulationOfPeopleInEachContinent()).thenReturn(reports);
         assertEquals(reports,appServices.getPopulationOfPeopleInEachContinent());
         Mockito.verify(dataLayer).getPopulationOfPeopleInEachContinent();
-        Mockito.verify(continentValidator).validate("Asia");
     }
 
     @Test
-    public void testtestGetLanguageReport(){
+    public void testGetLanguageReport(){
+        String[] languages = new String[]{ "German", "English" };
         List<LanguageReport> reports = getSampleLanguageReport();
-        Mockito.when(dataLayer.getLanguageReport(new String[]{ "German", "English" }));
-        assertEquals(reports,appServices.getLanguageReport(new String[]{ "German", "English" }));
-        Mockito.verify(dataLayer).getLanguageReport(new String[]{ "German", "English" });
+        Mockito.when(dataLayer.getLanguageReport(languages)).thenReturn(reports);
+        assertEquals(reports,appServices.getLanguageReport(languages));
+        Mockito.verify(dataLayer).getLanguageReport(languages);
     }
 
-
-
-
-
-
+    // --------- TEST OF VALIDATORS BELOW --------------- //
 
     @Test
     public void testContinentValidator() {
@@ -337,6 +333,7 @@ public class DefaultAppServicesTest {
         assertThrows(ServiceException.class, () -> limitValidator.validate(-2));
     }
 
+    // ---------- HELPER METHODS -------- //
 
     private List<CapitalCityReport> getSampleCapitalCityReports() {
         return List.of(new CapitalCityReport("Berlin", "Germany", 12345));
@@ -350,15 +347,16 @@ public class DefaultAppServicesTest {
         return List.of(new CityReport("Belfast","Northern Ireland","North Ireland",287500));
     }
 
-    private List<SimplePopulationReport> getSampleSimplePopulationReports(){
-        return List.of(new SimplePopulationReport("Kabul", 1780000));
+    private SimplePopulationReport getSampleSimplePopulationReport() {
+        return new SimplePopulationReport("Germany", 82164700L);
     }
 
     private List<PopulationReport> getSamplePopulationReports(){
-        return List.of(new PopulationReport("Germany", 82164700, 26245483));
+        return List.of(new PopulationReport("Germany", 82164700L, 26245483L));
     }
 
     private List<LanguageReport> getSampleLanguageReport(){
         return List.of(new LanguageReport("German", 82164700,100));
     }
+
 }

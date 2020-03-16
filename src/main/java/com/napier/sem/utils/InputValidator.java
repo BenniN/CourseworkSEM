@@ -19,6 +19,12 @@ public class InputValidator {
         }
     }
 
+    public static void checkNotNegative(Long number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("negative number not allowed");
+        }
+    }
+
     public static void checkNotNegative(Double number) {
         if (number < 0) {
             throw new IllegalArgumentException("negative number not allowed");

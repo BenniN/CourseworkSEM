@@ -20,6 +20,7 @@ public class DefaultAppServices implements AppServices {
     Validator<Integer> limitValidator = new LimitValidator();
     Validator<String> countryValidator = new CountryValidator();
     Validator<String> districtValidator = new DistrictValidator();
+    Validator<String> cityValidator = new CityValidator();
 
     public DefaultAppServices(DataLayer dataLayer) {
         this.dataLayer = dataLayer;
@@ -174,32 +175,37 @@ public class DefaultAppServices implements AppServices {
     }
 
     @Override
-    public SimplePopulationReport getThePopulationOfTheWorld() {
+    public Long getThePopulationOfTheWorld() {
         return dataLayer.getThePopulationOfTheWorld();
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfAContinent(String continent) {
+        continentValidator.validate(continent);
         return dataLayer.getThePopulationOfAContinent(continent);
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfARegion(String region) {
+        regionValidator.validate(region);
         return dataLayer.getThePopulationOfARegion(region);
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfACountry(String country) {
+        countryValidator.validate(country);
         return dataLayer.getThePopulationOfACountry(country);
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfADistrict(String district) {
+        districtValidator.validate(district);
         return dataLayer.getThePopulationOfADistrict(district);
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfACity(String city) {
+        cityValidator.validate(city);
         return dataLayer.getThePopulationOfACity(city);
     }
 

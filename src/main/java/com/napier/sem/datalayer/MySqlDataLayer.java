@@ -155,7 +155,7 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public List<PopulationReport> getPopulationOfPeopleInEachContinent() {
-        return producePopulationReport("SELECT cntry.Continent,\n" +
+        return producePopulationReport("SELECT cntry.Continent as name,\n" +
                 "       sum(cty.Population) as population_cities,\n" +
                 "       (SELECT sum(country.Population)\n" +
                 "        FROM country\n" +
@@ -167,7 +167,7 @@ public class MySqlDataLayer implements DataLayer {
 
     @Override
     public List<PopulationReport> getPopulationOfPeopleInEachRegion() {
-        return producePopulationReport("SELECT cntry.Region as \"name\", sum(cntry.Population) as \"population_total\", sum(cty.Population)\n" +
+        return producePopulationReport("SELECT cntry.Region as \"name\", sum(cntry.Population) as \"population_total\", sum(cty.Population) as population_cities\n" +
                 "FROM country cntry\n" +
                 "JOIN city cty ON cty.CountryCode = cntry.Code\n" +
                 "GROUP BY cntry.Region", DataLayer.NO_LIMIT);
@@ -182,26 +182,34 @@ public class MySqlDataLayer implements DataLayer {
     }
 
     @Override
-    public SimplePopulationReport getThePopulationOfTheWorld() {
-        return produceSimplePopulationReport ("select sum(population) as population from country;");
+    public Long getThePopulationOfTheWorld() {
+        ResultSet rs = executeSQLAndReturnResultSet("select sum(population) as population from country;", 1);
+        try {
+            if (rs.next()) {
+                return rs.getLong("population");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfAContinent(String continent) {
         return produceSimplePopulationReport("select continent as name, sum(population) as population from country\n" +
-                "where continent = " + continent + ";");
+                "where continent = '" + continent + "';");
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfARegion(String region) {
         return produceSimplePopulationReport("select region as name, sum(population) as population from country\n" +
-                "where region = " + region + ";");
+                "where region = '" + region + "';");
     }
 
     @Override
     public SimplePopulationReport getThePopulationOfACountry(String country) {
-        return produceSimplePopulationReport("select country as name, population as population from country\n" +
-                "where Name  = " + country + " ;");
+        return produceSimplePopulationReport("select name, population as population from country\n" +
+                "where Name  = '" + country + "' ;");
     }
 
     @Override
@@ -220,13 +228,13 @@ public class MySqlDataLayer implements DataLayer {
     public List<LanguageReport> getLanguageReport(String[] languages) {
         String langList = buildLanguageSqlList(languages);
         return produceLanguageReport("SELECT cl.Language,\n" +
-                "       sum(country.Population * cl.Percentage / 100) as total,\n" +
+                "       sum(country.Population * cl.Percentage / 100) as speakers,\n" +
                 "       sum(country.Population * cl.Percentage / 100) / (SELECT sum(country.Population) FROM country) * 100 as percentage\n" +
                 "FROM countrylanguage cl\n" +
                 "         JOIN country ON cl.CountryCode = country.Code\n" +
                 "WHERE cl.Language in (" + langList + ")\n" +
                 "GROUP BY cl.Language\n" +
-                "ORDER BY total DESC;");
+                "ORDER BY speakers DESC;");
     }
 
     String buildLanguageSqlList(String[] languages) {
@@ -333,8 +341,8 @@ public class MySqlDataLayer implements DataLayer {
     List<PopulationReport> producePopulationReport(String sql, int limit) {
         return produceReport(sql, limit, resultSet -> {
             String name = resultSet.getString("name");
-            int populationTotal = resultSet.getInt("population_total");
-            int populationCities = resultSet.getInt("population_cities");
+            long populationTotal = resultSet.getLong("population_total");
+            long populationCities = resultSet.getLong("population_cities");
             return new PopulationReport(name, populationTotal, populationCities);
         });
     }
@@ -367,7 +375,7 @@ public class MySqlDataLayer implements DataLayer {
     SimplePopulationReport produceSimplePopulationReport(String sql) {
         List<SimplePopulationReport> reports = produceReport(sql, 1, resultSet -> {
             String name = resultSet.getString("name");
-            int population = resultSet.getInt("population");
+            long population = resultSet.getLong("population");
             return new SimplePopulationReport(name, population);
         });
         if (reports.isEmpty()) {

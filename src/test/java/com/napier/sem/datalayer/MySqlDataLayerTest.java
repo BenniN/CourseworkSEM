@@ -123,13 +123,13 @@ public class MySqlDataLayerTest {
         Mockito.verify(dataLayer).produceCityReport(Mockito.any(), Mockito.anyInt());
 
     }
+
     @Test
     public void testGetThePopulationOfTheWorld(){
         ResultSet resultSet = Mockito.mock(ResultSet.class);
         Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
         dataLayer.getThePopulationOfTheWorld();
         Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
-        Mockito.verify(dataLayer).produceSimplePopulationReport(Mockito.any());
     }
 
     @Test
@@ -222,12 +222,12 @@ public class MySqlDataLayerTest {
         ResultSet result = Mockito.mock(ResultSet.class);
         Mockito.when(result.next()).thenReturn(true).thenReturn(false);
         Mockito.when(result.getString("name")).thenReturn("Edinburgh");
-        Mockito.when(result.getInt("population")).thenReturn(12345);
+        Mockito.when(result.getLong("population")).thenReturn(12345L);
         Mockito.doReturn(result).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
 
         SimplePopulationReport report = dataLayer.produceSimplePopulationReport(null);
         assertEquals("Edinburgh", report.getName());
-        assertEquals(12345, report.getPopulation());
+        assertEquals(12345L, report.getPopulation());
     }
 
     @Test
@@ -316,8 +316,8 @@ public class MySqlDataLayerTest {
         ResultSet resultSet = Mockito.mock(ResultSet.class);
         Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
         Mockito.when(resultSet.getString("name")).thenReturn("Germany");
-        Mockito.when(resultSet.getInt("population_total")).thenReturn(10);
-        Mockito.when(resultSet.getInt("population_cities")).thenReturn(4);
+        Mockito.when(resultSet.getLong("population_total")).thenReturn(10L);
+        Mockito.when(resultSet.getLong("population_cities")).thenReturn(4L);
         Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
 
         List<PopulationReport> reports = dataLayer.producePopulationReport(null, DataLayer.NO_LIMIT);

@@ -209,7 +209,7 @@ public interface AppServices {
     /**
      * @return a population report for the whole world.
      */
-    SimplePopulationReport getThePopulationOfTheWorld();
+    Long getThePopulationOfTheWorld();
 
     /**
      * Produces a population report for a specified continent.

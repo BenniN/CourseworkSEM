@@ -9,9 +9,9 @@ import com.napier.sem.utils.InputValidator;
 public final class PopulationReport {
 
     private final String name;
-    private final Integer totalPopulation;
-    private final Integer populationCities;
-    private final Integer populationNoCities;
+    private final Long totalPopulation;
+    private final Long populationCities;
+    private final Long populationNoCities;
     private final String populationNoCitesPercentage;
     private final String populationCitiesPercentage;
 
@@ -23,13 +23,17 @@ public final class PopulationReport {
      * @param totalPopulation the total population of this continent / region / country
      * @param populationCities the total population in cites of this continent / region / country
      */
-    public PopulationReport(String name, Integer totalPopulation, Integer populationCities) {
+    public PopulationReport(String name, Long totalPopulation, Long populationCities) {
         InputValidator.checkNotNull(name, totalPopulation, populationCities);
         InputValidator.checkNotNegative(totalPopulation);
         InputValidator.checkNotNegative(populationCities);
+
+        // the following is commented out due to database issues (issue country: gibraltar)
+        /*
         if (totalPopulation < populationCities) {
-            throw new IllegalArgumentException("total population cannot be higher than the (total) population in cities");
-        }
+            throw new IllegalArgumentException("total population cannot be higher than the (total) population in cities." +
+                    " Problem name: " + name + ", total population: " + totalPopulation + ", city population " + populationCities);
+        }*/
 
         this.name = name;
         this.totalPopulation = totalPopulation;
@@ -63,21 +67,21 @@ public final class PopulationReport {
     /**
      * @return the total population of this continent / region / country
      */
-    public Integer getTotalPopulation() {
+    public Long getTotalPopulation() {
         return totalPopulation;
     }
 
     /**
      * @return the population in cities of this continent / region / country
      */
-    public Integer getPopulationCities() {
+    public Long getPopulationCities() {
         return populationCities;
     }
 
     /**
      * @return the population outside cities of this continent / region / country
      */
-    public Integer getPopulationNoCities() {
+    public Long getPopulationNoCities() {
         return populationNoCities;
     }
 

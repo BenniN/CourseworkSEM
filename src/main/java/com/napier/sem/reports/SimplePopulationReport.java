@@ -9,14 +9,14 @@ import com.napier.sem.utils.InputValidator;
 public final class SimplePopulationReport {
 
     private String name;
-    private int population;
+    private Long population;
 
     /**
      * Creates a new simple population report with the specified name and population
      * @param name the name of the population area
      * @param population the total population for that area
      */
-    public SimplePopulationReport(String name, int population) {
+    public SimplePopulationReport(String name, Long population) {
         InputValidator.checkNotNull(name);
         InputValidator.checkNotNegative(population);
         this.name = name;
@@ -33,7 +33,7 @@ public final class SimplePopulationReport {
     /**
      * @return the total population in that area
      */
-    public int getPopulation() {
+    public Long getPopulation() {
         return population;
     }
 }
