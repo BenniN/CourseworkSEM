@@ -37,6 +37,21 @@ public class AppIntegrationTest {
     }
 
     @Test
+    public void testCityReports() {
+        appServices.getAllCitiesFromContinentOrderedByLargestPopulationToSmallest("Europe");
+        appServices.getAllCitiesFromCountryOrderedByLargestPopulationToSmallest("Germany");
+        appServices.getAllCitiesFromDistrictOrderedByLargestPopulationToSmallest("Bavaria");
+        appServices.getAllCitiesFromRegionOrderedByLargestPopulationToSmallest("North America");
+        appServices.getAllCitiesInTheWorldOrderedByLargestPopulationToSmallest();
+
+        appServices.getCitiesInTheWorldOrganisedByLargestPopulationToSmallest(3);
+        appServices.getCitiesInAContinentOrganisedByLargestPopulationToSmallest("Europe", 10);
+        appServices.getCitiesInACountryOrganisedByLargestPopulationToSmallest("Germany", 10);
+        appServices.getCitiesInARegionOrganisedByLargestPopulationToSmallest("British Islands", 20);
+        appServices.getCitiesInADistrictOrganisedByLargestPopulationToSmallest("Bavaria", 10);
+    }
+
+    @Test
     public void testCapitalCityReports() {
         appServices.getAllCapitalCitiesInTheWorldOrganisedByLargestPopulationToSmallest();
         appServices.getAllCapitalCitiesInAContinentOrganisedByLargestPopulationToSmallest("Europe");
@@ -62,6 +77,7 @@ public class AppIntegrationTest {
         appServices.getPopulationOfPeopleInEachRegion();
         appServices.getPopulationOfPeopleInEachCountry();
     }
+
     @Test
     public void testSimplePopulationReports(){
         appServices.getThePopulationOfTheWorld();
@@ -70,12 +86,10 @@ public class AppIntegrationTest {
         appServices.getThePopulationOfACountry("Germany");
         appServices.getThePopulationOfADistrict("Kabol");
         appServices.getThePopulationOfACity("Edinburgh");
-
     }
 
     @Test
     public void testLanguageReport(){
-
         appServices.getLanguageReport(new String[]{ "German", "English" });
     }
 
