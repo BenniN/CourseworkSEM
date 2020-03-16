@@ -123,6 +123,99 @@ public class MySqlDataLayerTest {
         Mockito.verify(dataLayer).produceCityReport(Mockito.any(), Mockito.anyInt());
 
     }
+    @Test
+    public void testGetThePopulationOfTheWorld(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getThePopulationOfTheWorld();
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceSimplePopulationReport(Mockito.any());
+    }
+
+    @Test
+    public void testGetThePopulationOfAContinent(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getThePopulationOfAContinent("Asia");
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceSimplePopulationReport(Mockito.any());
+    }
+
+    @Test
+    public void testGetThePopulationOfARegion(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getThePopulationOfARegion("North America");
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceSimplePopulationReport(Mockito.any());
+    }
+
+    @Test
+    public void testGetThePopulationOfACountry(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getThePopulationOfACountry("Germany");
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceSimplePopulationReport(Mockito.any());
+    }
+
+    @Test
+    public void testGetThePopulationOfADistrict(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getThePopulationOfACountry("Kabol");
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceSimplePopulationReport(Mockito.any());
+    }
+
+    @Test
+    public void testGetThePopulationOfACity(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getThePopulationOfACity("Edinburgh");
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceSimplePopulationReport(Mockito.any());
+    }
+
+    @Test
+    public void testGetPopulationOfPeopleInEachContinent(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getPopulationOfPeopleInEachContinent();
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).producePopulationReport(Mockito.any(), Mockito.anyInt());
+    }
+    @Test
+    public void testGetPopulationOfPeopleInEachRegion(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getPopulationOfPeopleInEachRegion();
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).producePopulationReport(Mockito.any(), Mockito.anyInt());
+    }
+    @Test
+    public void testGetPopulationOfPeopleInEachCountry(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getPopulationOfPeopleInEachCountry();
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).producePopulationReport(Mockito.any(), Mockito.anyInt());
+    }
+
+    @Test
+    public void testGetLanguageReport(){
+        ResultSet resultSet = Mockito.mock(ResultSet.class);
+        Mockito.doReturn(resultSet).when(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        dataLayer.getLanguageReport(new String[]{ "German", "English" });
+        Mockito.verify(dataLayer).executeSQLAndReturnResultSet(Mockito.any(), Mockito.anyInt());
+        Mockito.verify(dataLayer).produceLanguageReport(Mockito.any());
+    }
+
+
+
+
+
+
 
     @Test
     public void testProduceSimplePopulationReport() throws SQLException {
