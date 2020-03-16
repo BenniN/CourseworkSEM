@@ -4,6 +4,7 @@ import com.napier.sem.datalayer.DataLayer;
 import com.napier.sem.datalayer.MySqlDataLayer;
 import com.napier.sem.service.AppServices;
 import com.napier.sem.service.DefaultAppServices;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -91,6 +92,11 @@ public class AppIntegrationTest {
     @Test
     public void testLanguageReport(){
         appServices.getLanguageReport(new String[]{ "German", "English" });
+    }
+
+    @AfterAll
+    public static void cleanup() {
+        dataLayer.cleanup();
     }
 
 }
